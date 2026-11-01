@@ -45,7 +45,7 @@ export async function generateMetadata({ params }: BookPageProps): Promise<Metad
     openGraph: {
       title: `${book.title} — ${book.author} | مكتبة طيف`,
       description: book.description,
-      images: [{ url: "/images/banners/hero.jpg", width: 1600, height: 900 }],
+      images: [{ url: "/images/banners/hero.jpeg", width: 1600, height: 900 }],
     },
     keywords: [book.title, book.author, category?.name ?? "", "مكتبة طيف", "شراء كتب"],
   };

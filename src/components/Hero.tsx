@@ -20,15 +20,17 @@ export default function Hero() {
       {/* خلفية كونية */}
       <div className="absolute inset-0">
         <Image
-          src="/images/banners/hero.jpg"
+          src="/images/banners/hero.jpeg"
           alt="مكتبة كونية بأقواس مغربية وكتب تطفو بين النجوم"
           fill
           priority
           sizes="100vw"
-          className="object-cover opacity-55"
+          className="object-cover object-[72%_50%] opacity-80 lg:object-center lg:opacity-100"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-primary/85 via-primary/55 to-primary" />
-        <div className="absolute inset-0 bg-gradient-to-l from-primary/70 via-transparent to-primary/40" />
+        {/* تدرّج بنفسجي خفيف لضبط قراءة النص فوق الصورة دون إخفائها */}
+        <div className="absolute inset-0 bg-gradient-to-l from-primary/90 via-primary/55 to-primary/15" />
+        <div className="absolute inset-0 bg-gradient-to-r from-primary/75 via-primary/25 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/20 to-transparent" />
       </div>
       <Stars count={30} />
 

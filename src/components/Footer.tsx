@@ -34,13 +34,13 @@ export default function Footer() {
         {/* نبذة */}
         <div>
           <div className="flex items-center gap-3">
-            <span className="relative block size-12 overflow-hidden rounded-full ring-2 ring-gold/60">
+            <span className="relative block size-14 shrink-0 overflow-hidden rounded-2xl bg-primary-deep shadow-gold ring-1 ring-gold/60">
               <Image
-                src="/images/logo.png"
+                src="/images/logo.jpeg"
                 alt="شعار مكتبة طيف"
-                width={512}
-                height={512}
-                className="size-full scale-[1.14] object-cover"
+                width={1070}
+                height={1070}
+                className="size-full object-contain"
                 loading="lazy"
               />
             </span>

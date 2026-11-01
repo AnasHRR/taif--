@@ -41,10 +41,10 @@ export const metadata: Metadata = {
     title: "مكتبة طيف | بين صفحات الكتب تبدأ الحكايات",
     description:
       "وجهتك العربية الفاخرة للكتب — مختارات مدروسة وأسعار مناسبة وطلب سهل عبر واتساب.",
-    images: [{ url: "/images/banners/hero.jpg", width: 1600, height: 900, alt: "مكتبة طيف — مكتبة كونية بين النجوم" }],
+    images: [{ url: "/images/banners/hero.jpeg", width: 1600, height: 900, alt: "مكتبة طيف — مكتبة كونية بين النجوم" }],
   },
   robots: { index: true, follow: true },
-  icons: { icon: [{ url: "/images/logo.png", type: "image/png" }] },
+  icons: { icon: [{ url: "/images/logo.jpeg", type: "image/jpeg" }] },
 };
 
 export const viewport: Viewport = {
