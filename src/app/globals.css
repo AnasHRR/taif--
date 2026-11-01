@@ -1,0 +1,184 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------
+   مكتبة طيف — Design tokens
+------------------------------------------------------------------- */
+@theme {
+  --color-primary: #24102f;
+  --color-primary-deep: #170a20;
+  --color-secondary: #54266f;
+  --color-secondary-soft: #7c4a99;
+  --color-gold: #c9a45c;
+  --color-gold-light: #e9d3a0;
+  --color-gold-deep: #a27b36;
+  --color-cream: #faf8f3;
+  --color-sand: #f1ecdf;
+  --color-ink: #25212b;
+  --color-mist: #6e6780;
+
+  --font-display: "Cairo Variable", "Cairo", "Tajawal", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Tajawal", "Cairo Variable", ui-sans-serif, system-ui, sans-serif;
+
+  --shadow-card: 0 14px 40px -18px rgb(36 16 47 / 0.28);
+  --shadow-luxe: 0 30px 70px -28px rgb(36 16 47 / 0.5);
+  --shadow-gold: 0 14px 34px -14px rgb(201 164 92 / 0.6);
+
+  --animate-twinkle: twinkle 3.2s ease-in-out infinite;
+  --animate-float-slow: float-y 7s ease-in-out infinite;
+  --animate-float-slower: float-y 10s ease-in-out infinite;
+  --animate-marquee: marquee 42s linear infinite;
+  --animate-bounce-soft: bounce-soft 2.4s ease-in-out infinite;
+
+  @keyframes twinkle {
+    0%,
+    100% {
+      opacity: 0.15;
+      transform: scale(0.65);
+    }
+    50% {
+      opacity: 0.95;
+      transform: scale(1.05);
+    }
+  }
+  @keyframes float-y {
+    0%,
+    100% {
+      transform: translateY(0) rotate(var(--tilt, 0deg));
+    }
+    50% {
+      transform: translateY(-18px) rotate(var(--tilt, 0deg));
+    }
+  }
+  @keyframes marquee {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  @keyframes bounce-soft {
+    0%,
+    100% {
+      transform: translateY(0);
+      opacity: 0.9;
+    }
+    50% {
+      transform: translateY(8px);
+      opacity: 0.5;
+    }
+  }
+}
+
+/* ------------------------------------------------------------------
+   Base
+------------------------------------------------------------------- */
+html {
+  scroll-behavior: smooth;
+}
+
+::selection {
+  background: var(--color-gold);
+  color: var(--color-primary);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-cream);
+}
+::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--color-gold) 55%, var(--color-primary));
+  border-radius: 8px;
+  border: 2px solid var(--color-cream);
+}
+
+/* ------------------------------------------------------------------
+   Utilities
+------------------------------------------------------------------- */
+@utility shell {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 80rem;
+  padding-inline: 1rem;
+  @media (min-width: 640px) {
+    padding-inline: 1.5rem;
+  }
+  @media (min-width: 1024px) {
+    padding-inline: 2rem;
+  }
+}
+
+@utility no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@utility text-gradient-gold {
+  background-image: linear-gradient(
+    160deg,
+    var(--color-gold-light) 0%,
+    var(--color-gold) 45%,
+    var(--color-gold-deep) 100%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+@utility stars-pattern {
+  background-image:
+    radial-gradient(circle at 25% 30%, rgb(233 211 160 / 0.35) 0 1.2px, transparent 1.3px),
+    radial-gradient(circle at 70% 60%, rgb(255 255 255 / 0.22) 0 1px, transparent 1.1px),
+    radial-gradient(circle at 45% 80%, rgb(201 164 92 / 0.3) 0 1px, transparent 1.1px);
+  background-size:
+    180px 180px,
+    260px 260px,
+    140px 140px;
+}
+
+@utility frame-corners {
+  box-shadow:
+    inset 0 0 0 1px rgb(201 164 92 / 0.25),
+    inset 0 0 60px rgb(0 0 0 / 0.25);
+}
+
+/* Scroll reveal (triggered by <Reveal />) */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  filter: blur(5px);
+  transition:
+    opacity 0.9s ease,
+    transform 0.9s cubic-bezier(0.22, 0.61, 0.36, 1),
+    filter 0.9s ease;
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+  filter: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    transition: none;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
