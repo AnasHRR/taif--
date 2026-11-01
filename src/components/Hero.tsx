@@ -25,7 +25,7 @@ export default function Hero() {
           fill
           priority
           sizes="100vw"
-          className="object-cover object-[72%_50%] opacity-80 lg:object-center lg:opacity-100"
+          className="object-cover object-[72%_50%] opacity-85 lg:object-center lg:opacity-100"
         />
         {/* تدرّج بنفسجي خفيف لضبط قراءة النص فوق الصورة دون إخفائها */}
         <div className="absolute inset-0 bg-gradient-to-l from-primary/90 via-primary/55 to-primary/15" />

@@ -29,7 +29,9 @@ export default function CTABanner() {
   return (
     <section className="shell pb-24">
       <Reveal>
-        <div className="stars-pattern relative overflow-hidden rounded-[2.5rem] bg-gradient-to-l from-primary-deep via-primary to-secondary shadow-luxe ring-1 ring-gold/15">
+        <div className="relative overflow-hidden rounded-[2.5rem] bg-gradient-to-l from-primary-deep via-primary to-secondary shadow-luxe ring-1 ring-gold/15">
+          {/* نسيج نجوم خفيف — في طبقة منفصلة لتجنّب تعارض خلفية التدرّج */}
+          <div className="stars-pattern pointer-events-none absolute inset-0" aria-hidden="true" />
           {/* شريط ذهبي علوي متوهّج */}
           <div
             aria-hidden="true"
