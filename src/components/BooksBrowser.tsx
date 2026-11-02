@@ -35,11 +35,20 @@ function matchesQuery(book: Book, query: string): boolean {
   );
 }
 
+interface BooksBrowserProps {
+  /**
+   * فلتر سريع مبدئي يُستخدم عندما لا يحدّده باراميتر (filter) في الرابط —
+   * لصفحات مثل /new-arrivals و /special-offers التي لا تمرّر فلترها عبر rewrites.
+   */
+  presetFilter?: QuickFilter;
+}
+
 /**
  * متصفّح الكتب الكامل: بحث، تصنيف، سعر، ترتيب، وتوفر.
- * يقرأ باراميترات الرابط (?q= &category= &filter=) كنقطة بداية.
+ * يقرأ باراميترات الرابط (?q= &category= &filter=) كنقطة بداية،
+ * ويستخدم presetFilter كفلتر مبدئي عندما لا يحدّده الرابط.
  */
-export default function BooksBrowser() {
+export default function BooksBrowser({ presetFilter }: BooksBrowserProps = {}) {
   const searchParams = useSearchParams();
   const paramsString = searchParams.toString();
 
@@ -47,21 +56,21 @@ export default function BooksBrowser() {
   const [category, setCategory] = useState(() => searchParams.get("category") ?? "all");
   const [quickFilter, setQuickFilter] = useState<QuickFilter>(() => {
     const value = searchParams.get("filter");
-    return value === "new" || value === "offers" ? value : "";
+    return value === "new" || value === "offers" ? value : (presetFilter ?? "");
   });
   const [sort, setSort] = useState<SortKey>("recommended");
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
   const [onlyAvailable, setOnlyAvailable] = useState(false);
 
-  // مزامنة مع رابط جديد (مثلاً من شريط البحث أو قائمة التصنيفات)
+  // مزامنة مع رابط جديد (مثلاً من شريط البحث أو قائمة التصنيفات)؛ بدون باراميتر filter نعود للفلتر المبدئي
   useEffect(() => {
     const params = new URLSearchParams(paramsString);
     setQuery(params.get("q") ?? "");
     setCategory(params.get("category") ?? "all");
     const filter = params.get("filter");
-    setQuickFilter(filter === "new" || filter === "offers" ? filter : "");
-  }, [paramsString]);
+    setQuickFilter(filter === "new" || filter === "offers" ? filter : (presetFilter ?? ""));
+  }, [paramsString, presetFilter]);
 
   const results = useMemo(() => {
     const trimmed = query.trim();

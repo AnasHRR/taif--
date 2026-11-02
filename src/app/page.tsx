@@ -61,7 +61,7 @@ export default function HomePage() {
           <Reveal delay={200}>
             <div className="mt-14 text-center">
               <Link
-                href="/books"
+                href="/library"
                 className="group inline-flex items-center gap-2.5 rounded-full border-2 border-primary/20 bg-white px-8 py-3.5 text-sm font-extrabold text-primary shadow-card transition-all duration-300 hover:-translate-y-0.5 hover:border-gold hover:bg-primary hover:text-cream"
               >
                 تصفح جميع الكتب
@@ -121,7 +121,7 @@ export default function HomePage() {
           <Reveal delay={220}>
             <div className="mt-14 text-center">
               <Link
-                href="/books?filter=offers"
+                href="/special-offers"
                 className="group inline-flex items-center gap-2.5 rounded-full border border-gold/50 bg-gold/10 px-8 py-3.5 text-sm font-extrabold text-gold-light backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:bg-gold hover:text-primary hover:shadow-gold"
               >
                 <Sparkles className="size-4.5" aria-hidden="true" />

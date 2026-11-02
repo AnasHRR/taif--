@@ -63,7 +63,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
               </li>
               <li aria-hidden="true">/</li>
               <li>
-                <Link href="/categories" className="transition-colors hover:text-gold-light">
+                <Link href="/explore" className="transition-colors hover:text-gold-light">
                   التصنيفات
                 </Link>
               </li>
@@ -107,7 +107,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
               .map((cat) => (
                 <Link
                   key={cat.slug}
-                  href={`/categories/${cat.slug}`}
+                  href={`/explore/${cat.slug}`}
                   className={cx(
                     "rounded-full border border-primary/15 bg-white px-4.5 py-2 text-xs font-bold text-ink/75 shadow-card",
                     "transition-all duration-300 hover:-translate-y-0.5 hover:border-gold hover:bg-primary hover:text-cream",

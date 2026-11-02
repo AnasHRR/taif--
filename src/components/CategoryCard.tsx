@@ -16,7 +16,7 @@ export default function CategoryCard({ category, count, index = 0 }: CategoryCar
 
   return (
     <Link
-      href={`/categories/${category.slug}`}
+      href={`/explore/${category.slug}`}
       className="group relative block overflow-hidden rounded-2xl p-6 shadow-card outline-none transition-all duration-500 hover:-translate-y-1.5 hover:shadow-luxe frame-corners"
       style={{ backgroundImage: `linear-gradient(150deg, ${category.palette.from}, ${category.palette.to})` }}
       aria-label={`تصنيف ${category.name} — ${booksCountLabel(count)}`}

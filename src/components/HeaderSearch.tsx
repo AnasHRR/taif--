@@ -57,7 +57,7 @@ export default function HeaderSearch({ open, onClose }: HeaderSearchProps) {
 
   const goToAll = () => {
     onClose();
-    router.push(`/books?q=${encodeURIComponent(query.trim())}`);
+    router.push(`/library?q=${encodeURIComponent(query.trim())}`);
   };
 
   return (
@@ -81,7 +81,7 @@ export default function HeaderSearch({ open, onClose }: HeaderSearchProps) {
                   {results.map((book) => (
                     <li key={book.id}>
                       <Link
-                        href={`/books/${book.slug}`}
+                        href={`/library/${book.slug}`}
                         onClick={onClose}
                         className="flex items-center gap-3 rounded-2xl px-3 py-2.5 transition-colors hover:bg-sand"
                       >

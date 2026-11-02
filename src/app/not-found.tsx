@@ -32,7 +32,7 @@ export default function NotFound() {
             العودة للرئيسية
           </Link>
           <Link
-            href="/books"
+            href="/library"
             className="inline-flex items-center gap-2.5 rounded-full border border-cream/30 px-7 py-3.5 text-sm font-bold text-cream transition-all duration-300 hover:border-gold hover:bg-gold/10 hover:text-gold-light"
           >
             <BookOpen className="size-4.5" aria-hidden="true" />

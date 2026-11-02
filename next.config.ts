@@ -28,6 +28,34 @@ const nextConfig: NextConfig = {
   images: {
     unoptimized: true,
   },
+
+  /**
+   * روابط عامة أنيقة تعيد التوجيه داخلياً إلى الصفحات الحقيقية.
+   *
+   * الملاحظات:
+   * - هذه "rewrites" وليس "redirects": شريط العنوان يعرض الرابط العام
+   *   (/library، /explore ...) بينما تُعرض الصفحة الداخلية (/books، /categories...).
+   * - باراميترات الاستعلام التي يضيفها الزائر (؟q= &filter= &category= ...) تُمرَّر
+   *   كما هي في العنوان، لذا يظل البحث والفلاتر يعملان بعد إعادة التوجيه.
+   * - صفحات /new-arrivals و /special-offers صفحات مستقلة حقيقية (لا rewrites) لأن
+   *   باراميتر filter ثابت ولا يصل عبر إعادة التوجيه أثناء الترطيب في الصفحات المُسبقة
+   *   العرض — راجع src/components/BooksBrowser.tsx.
+   * - الصفحات الأصلية لا تزال متاحة عبر روابطها المباشرة (/books ...) —
+   *   إعادة التوجيه تخفي الوجهة أثناء التنقّل لكنها ليست حماية أو تشفيراً.
+   * - إعادة التوجيه لا تعمل عند التصدير الثابت (output: "export")؛ في هذه الحالة
+   *   تُبنى الروابط المباشرة كصفحات مستقلة، أما التشغيل العادي (next build/start)
+   *   فيستخدمها كما هي.
+   */
+  async rewrites() {
+    return [
+      { source: "/library", destination: "/books" },
+      { source: "/library/:slug", destination: "/books/:slug" },
+      { source: "/explore", destination: "/categories" },
+      { source: "/explore/:slug", destination: "/categories/:slug" },
+      { source: "/our-story", destination: "/about" },
+      { source: "/get-in-touch", destination: "/contact" },
+    ];
+  },
 };
 
 export default nextConfig;

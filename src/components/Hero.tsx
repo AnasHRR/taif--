@@ -59,7 +59,7 @@ export default function Hero() {
 
           <div className="mt-9 flex flex-wrap items-center gap-3.5">
             <Link
-              href="/books"
+              href="/library"
               className="group inline-flex items-center gap-2.5 rounded-full bg-gold px-7 py-3.5 text-sm font-extrabold text-primary shadow-gold transition-all duration-300 hover:-translate-y-0.5 hover:brightness-110"
             >
               اكتشف الكتب

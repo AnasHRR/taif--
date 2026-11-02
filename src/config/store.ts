@@ -12,15 +12,15 @@ export const storeConfig = {
    * رقم الواتساب بالصيغة الدولية بدون علامة «+» أو مسافات.
    * ⚠️ هذا رقم مؤقت — استبدله بالرقم الحقيقي للمكتبة (مثال: "212612345678").
    */
-  whatsappNumber: "212600000000",
+  whatsappNumber: "212681295714",
 
   /** رقم هاتف المعروض للزوار */
-  phoneDisplay: "+212 600 000 000",
-  phoneRaw: "+212600000000",
+  phoneDisplay: "+212 681295714",
+  phoneRaw: "+212681295714",
 
   email: "contact@taif-library.ma",
-  address: "شارع محمد الخامس، وسط المدينة",
-  city: "الدار البيضاء، المغرب",
+  address: "حي المسيرة، أمام محطة الطاكسيات الكبيرة",
+  city: "فاس، المغرب",
   workingHours: "الاثنين – السبت: 9 صباحاً إلى 9 مساءً",
   workingDays: "طوال أيام الأسبوع عبر واتساب",
 
@@ -33,7 +33,7 @@ export const storeConfig = {
   },
 
   /** العملة */
-  currency: { code: "MAD", label: "درهم" },
+  currency: { code: "DH", label: "درهم" },
 
   /** رابط الموقع (يُستخدم في بيانات Open Graph) */
   siteUrl: "https://taif-library.ma",

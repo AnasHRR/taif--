@@ -99,14 +99,14 @@ export default async function BookDetailsPage({ params }: BookPageProps) {
             </li>
             <li className="flex items-center gap-1.5">
               <ChevronLeft className="size-3 text-gold-deep" aria-hidden="true" />
-              <Link href="/books" className="transition-colors hover:text-secondary">
+              <Link href="/library" className="transition-colors hover:text-secondary">
                 جميع الكتب
               </Link>
             </li>
             {category ? (
               <li className="flex items-center gap-1.5">
                 <ChevronLeft className="size-3 text-gold-deep" aria-hidden="true" />
-                <Link href={`/categories/${category.slug}`} className="transition-colors hover:text-secondary">
+                <Link href={`/explore/${category.slug}`} className="transition-colors hover:text-secondary">
                   {category.name}
                 </Link>
               </li>
@@ -143,7 +143,7 @@ export default async function BookDetailsPage({ params }: BookPageProps) {
           <Reveal delay={130}>
             {category ? (
               <Link
-                href={`/categories/${category.slug}`}
+                href={`/explore/${category.slug}`}
                 className="inline-flex items-center gap-1.5 rounded-full bg-secondary/8 px-3.5 py-1.5 text-xs font-bold text-secondary transition-colors hover:bg-secondary hover:text-cream"
               >
                 <Tag className="size-3.5" aria-hidden="true" />

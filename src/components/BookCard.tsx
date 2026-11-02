@@ -21,7 +21,7 @@ export default function BookCard({ book, theme = "light", className }: BookCardP
   return (
     <article className={cx("group flex flex-col", className)}>
       <Link
-        href={`/books/${book.slug}`}
+        href={`/library/${book.slug}`}
         className="relative block outline-none"
         aria-label={`تفاصيل كتاب ${book.title}`}
       >
@@ -60,7 +60,7 @@ export default function BookCard({ book, theme = "light", className }: BookCardP
       <div className={cx("flex flex-1 flex-col pt-4", dark ? "text-cream" : "text-ink")}>
         {category ? (
           <Link
-            href={`/categories/${category.slug}`}
+            href={`/explore/${category.slug}`}
             className={cx(
               "mb-1 w-fit text-[11px] font-bold tracking-wide transition-colors",
               dark ? "text-gold-light hover:text-gold" : "text-secondary hover:text-gold-deep",
@@ -72,7 +72,7 @@ export default function BookCard({ book, theme = "light", className }: BookCardP
 
         <h3 className="font-display text-[15px] font-bold leading-6">
           <Link
-            href={`/books/${book.slug}`}
+            href={`/library/${book.slug}`}
             className={cx(
               "line-clamp-1 transition-colors",
               dark ? "text-cream group-hover:text-gold-light" : "text-ink group-hover:text-secondary",

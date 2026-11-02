@@ -12,10 +12,12 @@ import { useCart } from "@/hooks/useCart";
 import { cx } from "@/lib/utils";
 import HeaderSearch from "@/components/HeaderSearch";
 
-function isLinkActive(href: string, pathname: string): boolean {
+function isLinkActive(href: string, pathname: string, altPaths: string[] = []): boolean {
   if (href.includes("?")) return false;
   if (href === "/") return pathname === "/";
-  return pathname === href || pathname.startsWith(`${href}/`);
+  // مع rewrites قد يعيد usePathname المسار الداخلي، فنفحص الرابط العام ووجهته الداخلية معاً
+  const bases = [href, ...altPaths];
+  return bases.some((base) => pathname === base || pathname.startsWith(`${base}/`));
 }
 
 export default function Header() {
@@ -101,7 +103,7 @@ export default function Header() {
           <nav aria-label="التنقل الرئيسي" className="hidden lg:block">
             <ul className="flex items-center gap-1">
               {navLinks.map((link) => {
-                const active = isLinkActive(link.href, pathname);
+                const active = isLinkActive(link.href, pathname, link.altPaths);
                 return (
                   <li key={link.href + link.label}>
                     <Link
@@ -189,7 +191,7 @@ export default function Header() {
                     onClick={() => setMenuOpen(false)}
                     className={cx(
                       "flex items-center justify-between rounded-2xl px-4 py-3 font-display text-base font-bold transition-colors",
-                      isLinkActive(link.href, pathname)
+                      isLinkActive(link.href, pathname, link.altPaths)
                         ? "bg-primary text-cream"
                         : "text-ink/80 hover:bg-sand hover:text-primary",
                     )}

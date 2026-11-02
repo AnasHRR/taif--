@@ -110,7 +110,7 @@ export default function AboutPage() {
             </p>
           </div>
           <Link
-            href="/books"
+            href="/library"
             className="group mt-8 inline-flex items-center gap-2.5 rounded-full bg-primary px-7 py-3.5 text-sm font-extrabold text-cream shadow-card transition-all duration-300 hover:-translate-y-0.5 hover:bg-secondary"
           >
             تصفّح رفوفنا

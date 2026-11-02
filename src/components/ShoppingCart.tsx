@@ -86,7 +86,7 @@ export default function ShoppingCart() {
               </p>
             </div>
             <Link
-              href="/books"
+              href="/library"
               onClick={closeCart}
               className="mt-2 inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-bold text-cream shadow-card transition-all duration-300 hover:bg-secondary"
             >
@@ -98,14 +98,14 @@ export default function ShoppingCart() {
             <ul className="flex-1 space-y-4 overflow-y-auto px-5 py-5">
               {items.map(({ book, quantity }) => (
                 <li key={book.id} className="flex gap-3.5 rounded-2xl bg-white p-3 shadow-card">
-                  <Link href={`/books/${book.slug}`} onClick={closeCart} className="block w-16 shrink-0">
+                  <Link href={`/library/${book.slug}`} onClick={closeCart} className="block w-16 shrink-0">
                     <BookCover book={book} size="xs" className="rounded-md shadow-card" />
                   </Link>
                   <div className="flex min-w-0 flex-1 flex-col">
                     <div className="flex items-start justify-between gap-2">
                       <div className="min-w-0">
                         <Link
-                          href={`/books/${book.slug}`}
+                          href={`/library/${book.slug}`}
                           onClick={closeCart}
                           className="line-clamp-1 font-display text-sm font-bold text-ink transition-colors hover:text-secondary"
                         >

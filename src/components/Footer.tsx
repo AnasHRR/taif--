@@ -96,7 +96,7 @@ export default function Footer() {
             {categories.map((category) => (
               <li key={category.slug}>
                 <Link
-                  href={`/categories/${category.slug}`}
+                  href={`/explore/${category.slug}`}
                   className="inline-flex items-center gap-2 transition-all duration-300 hover:gap-3 hover:text-gold-light"
                 >
                   <span aria-hidden="true" className="size-1 rotate-45 bg-gold/70" />

@@ -37,7 +37,7 @@ export default function CartPageClient() {
           </p>
         </div>
         <Link
-          href="/books"
+          href="/library"
           className="inline-flex items-center gap-2 rounded-full bg-primary px-7 py-3.5 text-sm font-extrabold text-cream shadow-card transition-colors hover:bg-secondary"
         >
           تصفح جميع الكتب
@@ -81,14 +81,14 @@ export default function CartPageClient() {
               key={book.id}
               className="flex gap-4 rounded-3xl border border-primary/8 bg-white p-4 shadow-card sm:items-center sm:gap-6 sm:p-5"
             >
-              <Link href={`/books/${book.slug}`} className="block w-20 shrink-0 sm:w-24">
+              <Link href={`/library/${book.slug}`} className="block w-20 shrink-0 sm:w-24">
                 <BookCover book={book} size="xs" className="rounded-lg shadow-card" />
               </Link>
 
               <div className="flex min-w-0 flex-1 flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                 <div className="min-w-0">
                   <Link
-                    href={`/books/${book.slug}`}
+                    href={`/library/${book.slug}`}
                     className="line-clamp-1 font-display text-base font-extrabold text-ink transition-colors hover:text-secondary"
                   >
                     {book.title}
