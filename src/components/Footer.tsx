@@ -12,13 +12,13 @@ import { navLinks } from "@/config/navigation";
 import { categories } from "@/data/categories";
 import { buildGreetingMessage, getWhatsAppUrl } from "@/lib/whatsapp";
 import Stars from "@/components/Stars";
-import { FacebookIcon, InstagramIcon, XIcon, YoutubeIcon } from "@/components/SocialIcons";
+import { FacebookIcon, InstagramIcon} from "@/components/SocialIcons";
 
 const socials = [
   { href: storeConfig.social.instagram, label: "إنستغرام", icon: InstagramIcon },
   { href: storeConfig.social.facebook, label: "فيسبوك", icon: FacebookIcon },
-  { href: storeConfig.social.x, label: "إكس", icon: XIcon },
-  { href: storeConfig.social.youtube, label: "يوتيوب", icon: YoutubeIcon },
+  // { href: storeConfig.social.x, label: "إكس", icon: XIcon },
+  // { href: storeConfig.social.youtube, label: "يوتيوب", icon: YoutubeIcon },
 ];
 
 export default function Footer() {

@@ -72,7 +72,7 @@ export default function AboutPage() {
               className="absolute -inset-5 rounded-[2.5rem] bg-gradient-to-br from-gold/30 via-transparent to-secondary/20 blur-2xl"
             />
             <Image
-              src="/images/banners/about.jpg"
+              src="/images/logo.jpeg"
               alt="ركن قراءة دافئ داخل مكتبة طيف بإضاءة ذهبية ورفوف خشبية"
               width={1024}
               height={768}
@@ -80,7 +80,7 @@ export default function AboutPage() {
             />
             <div className="absolute -bottom-6 right-6 rounded-3xl border border-gold/30 bg-primary px-6 py-4 text-cream shadow-luxe">
               <p className="font-display text-2xl font-black text-gold-light" dir="ltr">
-                2021
+                2025
               </p>
               <p className="mt-1 text-xs text-cream/70">عام افتتاح أول رفّ لنا</p>
             </div>

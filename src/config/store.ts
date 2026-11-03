@@ -5,7 +5,7 @@
 export const storeConfig = {
   /** اسم المكتبة */
   name: "مكتبة طيف",
-  nameLatin: "Taif Library",
+  nameLatin: "phantom Library",
   tagline: "بين صفحات الكتب تبدأ الحكايات",
 
   /**
@@ -26,17 +26,17 @@ export const storeConfig = {
 
   /** روابط التواصل الاجتماعي */
   social: {
-    instagram: "https://instagram.com/taif.library",
-    facebook: "https://facebook.com/taif.library",
-    x: "https://x.com/taif_library",
-    youtube: "https://youtube.com/@taif-library",
+    instagram: "https://www.instagram.com/o_phantom_librery?mdxt=MWVlaXByMm1sZW1vbA==",
+    facebook: "https://www.facebook.com/profile.php?id=61592810347060&mibextid=ZbWKwL",
+    // x: "https://x.com/taif_library",
+    // youtube: "https://youtube.com/@taif-library",
   },
 
   /** العملة */
   currency: { code: "DH", label: "درهم" },
 
   /** رابط الموقع (يُستخدم في بيانات Open Graph) */
-  siteUrl: "https://taif-library.ma",
+  siteUrl: "https://pahntomlibrary.netlify.app",
 } as const;
 
 export type StoreConfig = typeof storeConfig;

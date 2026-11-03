@@ -6,7 +6,7 @@ import PageHero from "@/components/PageHero";
 import ContactForm from "@/components/ContactForm";
 import Reveal from "@/components/Reveal";
 import Stars from "@/components/Stars";
-import { FacebookIcon, InstagramIcon, XIcon, YoutubeIcon } from "@/components/SocialIcons";
+import { FacebookIcon, InstagramIcon} from "@/components/SocialIcons";
 
 export const metadata: Metadata = {
   title: "اتصل بنا",
@@ -48,8 +48,8 @@ const channels = [
 const socials = [
   { href: storeConfig.social.instagram, label: "إنستغرام", icon: InstagramIcon },
   { href: storeConfig.social.facebook, label: "فيسبوك", icon: FacebookIcon },
-  { href: storeConfig.social.x, label: "إكس", icon: XIcon },
-  { href: storeConfig.social.youtube, label: "يوتيوب", icon: YoutubeIcon },
+  // { href: storeConfig.social.x, label: "إكس", icon: XIcon },
+  // { href: storeConfig.social.youtube, label: "يوتيوب", icon: YoutubeIcon },
 ];
 
 export default function ContactPage() {
