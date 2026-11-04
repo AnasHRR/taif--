@@ -77,7 +77,7 @@ export default function Hero() {
           </div>
 
           {/* إحصاءات */}
-          <dl className="mt-12 grid max-w-lg grid-cols-3 gap-6 border-t border-cream/15 pt-7">
+          <dl className="mt-12 grid max-w-lg grid-cols-3 text-center gap-6 border-t border-cream/15 pt-7">
             {[
               { value: "+25", label: "كتاب مختار بعناية" },
               { value: "8", label: "تصنيفات متنوعة" },
