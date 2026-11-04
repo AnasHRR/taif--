@@ -30,22 +30,22 @@ export function buildOrderMessage(order: OrderDetails): string {
     "",
     "أرغب في تقديم طلب جديد:",
     "",
-    `الاسم: ${order.name}`,
-    `رقم الهاتف: ${order.phone}`,
-    `المدينة: ${order.city}`,
+    `*الاسم:* ${order.name}`,
+    `*رقم الهاتف:* ${order.phone}`,
+    `*المدينة:* ${order.city}`,
   ];
 
   if (order.address && order.address.trim().length > 0) {
-    lines.push(`العنوان: ${order.address.trim()}`);
+    lines.push(`*العنوان:* ${order.address.trim()}`);
   }
 
-  lines.push("", "تفاصيل الطلب:");
+  lines.push("", "*تفاصيل الطلب:*");
 
   order.lines.forEach((line) => {
     lines.push(`${line.title} × ${line.quantity} = ${formatPrice(line.price * line.quantity)}`);
   });
 
-  lines.push("", `المجموع الإجمالي: ${formatPrice(order.total)}`);
+  lines.push("", `*المجموع الإجمالي:* ${formatPrice(order.total)}`);
 
   if (order.notes && order.notes.trim().length > 0) {
     lines.push("", `ملاحظات: ${order.notes.trim()}`);
