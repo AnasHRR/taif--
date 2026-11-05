@@ -38,8 +38,10 @@ export default function Footer() {
               <Image
                 src="/images/logo.jpeg"
                 alt="شعار مكتبة طيف"
-                width={1070}
-                height={1070}
+                width={112}
+                height={112}
+                sizes="56px"
+                fetchPriority="low"
                 className="size-full object-contain"
                 loading="lazy"
               />

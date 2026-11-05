@@ -17,14 +17,17 @@ export default function Hero() {
 
   return (
     <section className="relative overflow-hidden bg-primary text-cream">
-      {/* خلفية كونية */}
+      {/* خلفية كونية — عنصر LCP: يُحمَل بأولوية عالية دون كسل،
+          ويُقدَّم للموبايل بدرجة دقة منخفضة وجودة مضغوطة. */}
       <div className="absolute inset-0">
         <Image
           src="/images/banners/hero.jpeg"
           alt="مكتبة كونية بأقواس مغربية وكتب تطفو بين النجوم"
           fill
           priority
-          sizes="100vw"
+          fetchPriority="high"
+          quality={72}
+          sizes="(max-width: 640px) 640px, (max-width: 1024px) 1024px, 1671px"
           className="object-cover object-[72%_50%] opacity-85 lg:object-center lg:opacity-100"
         />
         {/* تدرّج بنفسجي خفيف لضبط قراءة النص فوق الصورة دون إخفائها */}

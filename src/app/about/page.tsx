@@ -76,7 +76,9 @@ export default function AboutPage() {
               alt="ركن قراءة دافئ داخل مكتبة طيف بإضاءة ذهبية ورفوف خشبية"
               width={1024}
               height={768}
+              sizes="(max-width: 1024px) 100vw, 50vw"
               className="relative aspect-[4/3] w-full rounded-[2rem] object-cover shadow-luxe"
+              loading="lazy"
             />
             <div className="absolute -bottom-6 right-6 rounded-3xl border border-gold/30 bg-primary px-6 py-4 text-cream shadow-luxe">
               <p className="font-display text-2xl font-black text-gold-light" dir="ltr">
