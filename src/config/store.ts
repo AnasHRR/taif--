@@ -5,8 +5,14 @@
 export const storeConfig = {
   /** اسم المكتبة */
   name: "مكتبة طيف",
-  nameLatin: "phantom Library",
+  nameLatin: "Phantom Library",
   tagline: "بين صفحات الكتب تبدأ الحكايات",
+  title: "مكتبة طيف | عالم الكتب والقراءة",
+  titleLatin: "Phantom Library | Your World of Books",
+  description:
+    "اكتشف مكتبة طيف، وجهتك لاكتشاف الكتب والروايات والمراجع، وتصفح مجموعة متنوعة من الكتب حسب التصنيفات والاهتمامات.",
+  descriptionLatin:
+    "Discover Phantom Library, explore books, novels and reading collections, and find your next favorite book.",
 
   /**
    * رقم الواتساب بالصيغة الدولية بدون علامة «+» أو مسافات.
@@ -35,8 +41,8 @@ export const storeConfig = {
   /** العملة */
   currency: { code: "DH", label: "درهم" },
 
-  /** رابط الموقع (يُستخدم في بيانات Open Graph) */
-  siteUrl: "https://pahntomlibrary.netlify.app",
+  /** رابط الموقع الرسمي للإنتاج */
+  siteUrl: "https://phantomlibrery.netlify.app",
 } as const;
 
 export type StoreConfig = typeof storeConfig;

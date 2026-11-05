@@ -1,6 +1,9 @@
-# Netlify — static asset caching for the Next.js build
-# Keep the Netlify Next.js plugin defaults untouched; these headers only
+# Netlify — build + static asset caching for the Next.js build
+# The Netlify Next.js plugin defaults are left untouched; these headers only
 # extend how long browsers/CDN keep code-split chunks, fonts and images.
+
+[build]
+  command = "npm run build"
 
 [[headers]]
   for = "/_next/static/*"
@@ -15,6 +18,7 @@
 [[headers]]
   for = "/*"
   [headers.values]
+    X-Frame-Options = "DENY"
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
     Permissions-Policy = "camera=(), microphone=(), geolocation=()"

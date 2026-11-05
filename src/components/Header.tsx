@@ -81,7 +81,11 @@ export default function Header() {
       >
         <div className="shell flex h-16 items-center justify-between gap-3 sm:h-[4.5rem]">
           {/* الشعار */}
-          <Link href="/" className="group flex items-center gap-3 outline-none" aria-label="مكتبة طيف — الصفحة الرئيسية">
+          <Link
+            href="/"
+            className="group flex items-center gap-3 outline-none"
+            aria-label="مكتبة طيف (Phantom Library) — الصفحة الرئيسية"
+          >
             <span className="relative block size-11 shrink-0 overflow-hidden rounded-2xl bg-primary-deep shadow-gold ring-1 ring-gold/60 transition-transform duration-300 group-hover:scale-105 sm:size-14">
               {/* الشعار يُعرض بعرض 44/56px فقط — لا حاجة لأولوية LCP ولا لدقة 1070px */}
               <Image

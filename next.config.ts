@@ -60,6 +60,7 @@ const nextConfig: NextConfig = {
     ];
   },
   poweredByHeader: false,
+
   /**
    * روابط عامة أنيقة تعيد التوجيه داخلياً إلى الصفحات الحقيقية.
    *

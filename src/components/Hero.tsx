@@ -22,7 +22,7 @@ export default function Hero() {
       <div className="absolute inset-0">
         <Image
           src="/images/banners/hero.jpeg"
-          alt="مكتبة كونية بأقواس مغربية وكتب تطفو بين النجوم"
+          alt="مكتبة طيف (Phantom Library) — مكتبة إلكترونية لاستكشاف الكتب والروايات وعالم القراءة"
           fill
           priority
           fetchPriority="high"
@@ -46,18 +46,17 @@ export default function Hero() {
         <div className="max-w-2xl">
           <span className="inline-flex items-center gap-2 rounded-full border border-gold/40 bg-gold/10 px-4 py-1.5 text-xs font-bold text-gold-light backdrop-blur-sm">
             <Sparkles className="size-3.5" aria-hidden="true" />
-            مكتبة عربية فاخرة — اطلب بضغطة واحدة عبر واتساب
+            مكتبة إلكترونية عربية — Phantom Library
           </span>
 
           <h1 className="mt-6 font-display text-4xl font-black leading-[1.25] sm:text-5xl lg:text-[3.4rem] lg:leading-[1.3]">
-            اكتشف عالماً من المعرفة
+            عالم القراءة والمعرفة
             <br />
             مع <span className="text-gradient-gold">مكتبة طيف</span>
           </h1>
 
           <p className="mt-5 max-w-xl text-base leading-8 text-cream/80 sm:text-lg">
-            بين صفحات الكتب تبدأ الحكايات، وتتوسع الآفاق، وتولد الأفكار.
-            اختر كتابك القادم من مختاراتنا، وسيصلك أينما كنت.
+            وجهتك لاكتشاف أفضل الكتب والروايات والمراجع الثقافية والتعليمية. تصفح أحدث الكتب وتصنيفات الكتب المتنوعة مع تجربة شراء الكتب عبر الإنترنت بطلب سهل عبر واتساب.
           </p>
 
           <div className="mt-9 flex flex-wrap items-center gap-3.5">
@@ -80,7 +79,7 @@ export default function Hero() {
           </div>
 
           {/* إحصاءات */}
-          <dl className="mt-12 grid max-w-lg grid-cols-3 gap-6 border-t border-cream/15 pt-7">
+          <dl className="mt-12 grid max-w-lg grid-cols-3 text-center gap-6 border-t border-cream/15 pt-7">
             {[
               { value: "+25", label: "كتاب مختار بعناية" },
               { value: "8", label: "تصنيفات متنوعة" },
