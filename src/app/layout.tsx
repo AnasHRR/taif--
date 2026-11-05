@@ -44,7 +44,8 @@ const englishKeywords = [
 
 const googleVerification =
   process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION ||
-  process.env.GOOGLE_SITE_VERIFICATION;
+  process.env.GOOGLE_SITE_VERIFICATION ||
+  "ugmCHmAbZBwR91-fOpkiwok0XbsmLEEiBVkTSZjChzQ";
 
 export const metadata: Metadata = {
   metadataBase: new URL(storeConfig.siteUrl),

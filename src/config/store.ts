@@ -42,7 +42,7 @@ export const storeConfig = {
   currency: { code: "DH", label: "درهم" },
 
   /** رابط الموقع الرسمي للإنتاج */
-  siteUrl: "https://phantomlibrary.netlify.app",
+  siteUrl: "https://phantomlibrery.netlify.app",
 } as const;
 
 export type StoreConfig = typeof storeConfig;
