@@ -15,6 +15,7 @@ import {
 import { books, getBookBySlug, getRelatedBooks } from "@/data/books";
 import { getCategoryBySlug } from "@/data/categories";
 import { storeConfig } from "@/config/store";
+import { getBookSchema, getBreadcrumbSchema } from "@/lib/schema";
 import { cx, discountPercent, formatPrice } from "@/lib/utils";
 import BookCover from "@/components/BookCover";
 import BookGrid from "@/components/BookGrid";
@@ -42,12 +43,38 @@ export async function generateMetadata({ params }: BookPageProps): Promise<Metad
   return {
     title: `${book.title} — ${book.author}`,
     description: book.description,
+    alternates: {
+      canonical: `/books/${book.slug}`,
+    },
     openGraph: {
+      type: "article",
       title: `${book.title} — ${book.author} | مكتبة طيف`,
       description: book.description,
-      images: [{ url: "/images/banners/hero.jpeg", width: 1600, height: 900 }],
+      url: `${storeConfig.siteUrl}/books/${book.slug}`,
+      images: [
+        {
+          url: "/images/banners/hero.jpeg",
+          width: 1600,
+          height: 900,
+          alt: `${book.title} — ${book.author}`,
+        },
+      ],
     },
-    keywords: [book.title, book.author, category?.name ?? "", "مكتبة طيف", "شراء كتب"],
+    twitter: {
+      card: "summary_large_image",
+      title: `${book.title} — ${book.author} | مكتبة طيف`,
+      description: book.description,
+      images: ["/images/banners/hero.jpeg"],
+    },
+    keywords: [
+      book.title,
+      book.author,
+      category?.name ?? "",
+      "مكتبة طيف",
+      "Phantom Library",
+      "شراء كتب",
+      "كتب عربية",
+    ],
   };
 }
 
@@ -60,33 +87,32 @@ export default async function BookDetailsPage({ params }: BookPageProps) {
   const discount = discountPercent(book.price, book.oldPrice);
   const related = getRelatedBooks(book);
 
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Book",
-    name: book.title,
-    author: { "@type": "Person", name: book.author },
-    inLanguage: "ar",
-    numberOfPages: book.pages,
-    datePublished: String(book.year),
-    publisher: { "@type": "Organization", name: book.publisher },
-    offers: {
-      "@type": "Offer",
-      price: book.price,
-      priceCurrency: storeConfig.currency.code,
-      availability: book.available ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
-    },
-  };
+  const bookSchema = getBookSchema(book);
+  const breadcrumbItems = [
+    { name: "الرئيسية", url: "/" },
+    { name: "جميع الكتب", url: "/books" },
+    ...(category ? [{ name: category.name, url: `/categories/${category.slug}` }] : []),
+    { name: book.title, url: `/books/${book.slug}` },
+  ];
+  const breadcrumbSchema = getBreadcrumbSchema(breadcrumbItems);
 
   const metaRows = [
-    { icon: BookOpen, label: "عدد الصفحات", value: `${book.pages} صفحة` },
-    { icon: Building2, label: "دار النشر", value: book.publisher },
-    { icon: CalendarDays, label: "سنة النشر", value: String(book.year) },
-    { icon: LanguagesIcon, label: "اللغة", value: book.language },
-  ];
+    book.pages > 0 ? { icon: BookOpen, label: "عدد الصفحات", value: `${book.pages} صفحة` } : null,
+    book.publisher ? { icon: Building2, label: "دار النشر", value: book.publisher } : null,
+    book.year > 0 ? { icon: CalendarDays, label: "سنة النشر", value: String(book.year) } : null,
+    book.language ? { icon: LanguagesIcon, label: "اللغة", value: book.language } : null,
+  ].filter((row): row is { icon: typeof BookOpen; label: string; value: string } => row !== null);
 
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(bookSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
 
       {/* مسار التنقل */}
       <div className="border-b border-primary/8 bg-white/60">

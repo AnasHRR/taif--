@@ -28,6 +28,9 @@ const nextConfig: NextConfig = {
   images: {
     unoptimized: true,
   },
+  experimental: {
+    cpus: 1,
+  },
 
   /**
    * روابط عامة أنيقة تعيد التوجيه داخلياً إلى الصفحات الحقيقية.

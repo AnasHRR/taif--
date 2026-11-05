@@ -1,7 +1,9 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft, BadgePercent, Sparkles } from "lucide-react";
 import { getCategoryCounts, getFeaturedBooks, getNewBooks, getOfferBooks } from "@/data/books";
 import { categories } from "@/data/categories";
+import { storeConfig } from "@/config/store";
 import Hero from "@/components/Hero";
 import QuoteMarquee from "@/components/QuoteMarquee";
 import SectionHeading from "@/components/SectionHeading";
@@ -13,6 +15,38 @@ import WhyChooseUs from "@/components/WhyChooseUs";
 import CTABanner from "@/components/CTABanner";
 import Reveal from "@/components/Reveal";
 import Stars from "@/components/Stars";
+
+export const metadata: Metadata = {
+  title: {
+    absolute: "مكتبة طيف | عالم الكتب والقراءة",
+  },
+  description:
+    "اكتشف مكتبة طيف وتصفح مجموعة متنوعة من الكتب والروايات والمراجع في مختلف المجالات.",
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    title: "مكتبة طيف | عالم الكتب والقراءة",
+    description:
+      "اكتشف مكتبة طيف وتصفح مجموعة متنوعة من الكتب والروايات والمراجع في مختلف المجالات.",
+    url: storeConfig.siteUrl,
+    images: [
+      {
+        url: "/images/banners/hero.jpeg",
+        width: 1600,
+        height: 900,
+        alt: "مكتبة طيف | عالم الكتب والقراءة — Phantom Library",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "مكتبة طيف | عالم الكتب والقراءة",
+    description:
+      "اكتشف مكتبة طيف وتصفح مجموعة متنوعة من الكتب والروايات والمراجع في مختلف المجالات.",
+    images: ["/images/banners/hero.jpeg"],
+  },
+};
 
 export default function HomePage() {
   const counts = getCategoryCounts();

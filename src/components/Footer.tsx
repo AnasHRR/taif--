@@ -37,7 +37,7 @@ export default function Footer() {
             <span className="relative block size-14 shrink-0 overflow-hidden rounded-2xl bg-primary-deep shadow-gold ring-1 ring-gold/60">
               <Image
                 src="/images/logo.jpeg"
-                alt="شعار مكتبة طيف"
+                alt="شعار مكتبة طيف — Phantom Library"
                 width={1070}
                 height={1070}
                 className="size-full object-contain"
@@ -47,11 +47,11 @@ export default function Footer() {
             <div>
               <p className="font-display text-xl font-extrabold text-cream">{storeConfig.name}</p>
               <p className="text-[11px] tracking-[0.24em] text-gold">{storeConfig.tagline}</p>
+              <p className="text-[10px] tracking-wider text-cream/40" dir="ltr">{storeConfig.nameLatin}</p>
             </div>
           </div>
           <p className="mt-5 text-sm leading-7 text-cream/60">
-            مكتبة عربية مستقلة نختار لكم أجمل الإصدارات في الأدب والفكر والعلم،
-            ونوصلها إلى باب بيتكم بطلب بسيط عبر واتساب.
+            مكتبة طيف (Phantom Library) — وجهتك لاكتشاف أفضل الكتب والروايات والمراجع، وتصفح أحدث الكتب وتصنيفات الكتب المتنوعة مع طلب سهل وسريع عبر واتساب.
           </p>
           <div className="mt-5 flex items-center gap-2.5">
             {socials.map(({ href, label, icon: Icon }) => (

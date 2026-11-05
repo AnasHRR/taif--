@@ -3,6 +3,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { categories, getCategoryBySlug } from "@/data/categories";
 import { getBooksByCategory, getCategoryCounts } from "@/data/books";
+import { storeConfig } from "@/config/store";
+import { getBreadcrumbSchema } from "@/lib/schema";
 import { getCategoryIcon } from "@/lib/category-icons";
 import { booksCountLabel, cx } from "@/lib/utils";
 import Stars from "@/components/Stars";
@@ -23,12 +25,33 @@ export async function generateMetadata({ params }: CategoryPageProps): Promise<M
   const { slug } = await params;
   const category = getCategoryBySlug(slug);
   if (!category) return { title: "التصنيف غير موجود" };
+
+  const description = `اكتشف كتب قسم ${category.name} في مكتبة طيف: ${category.description}`;
+
   return {
     title: category.name,
-    description: category.description,
+    description,
+    alternates: {
+      canonical: `/categories/${category.slug}`,
+    },
     openGraph: {
       title: `${category.name} | مكتبة طيف`,
-      description: category.description,
+      description,
+      url: `${storeConfig.siteUrl}/categories/${category.slug}`,
+      images: [
+        {
+          url: "/images/banners/hero.jpeg",
+          width: 1600,
+          height: 900,
+          alt: `${category.name} | مكتبة طيف — Phantom Library`,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${category.name} | مكتبة طيف`,
+      description,
+      images: ["/images/banners/hero.jpeg"],
     },
   };
 }
@@ -42,8 +65,18 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
   const counts = getCategoryCounts();
   const Icon = getCategoryIcon(slug);
 
+  const breadcrumbs = getBreadcrumbSchema([
+    { name: "الرئيسية", url: "/" },
+    { name: "تصنيفات الكتب", url: "/categories" },
+    { name: category.name, url: `/categories/${category.slug}` },
+  ]);
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbs) }}
+      />
       {/* ترويسة التصنيف بألوانه الخاصة */}
       <section
         className="stars-pattern relative overflow-hidden py-16 text-cream sm:py-20"

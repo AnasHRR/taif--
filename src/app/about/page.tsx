@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, BookMarked, HeartHandshake, ShieldCheck, Sparkles, Truck } from "lucide-react";
 import { storeConfig } from "@/config/store";
+import { getBreadcrumbSchema } from "@/lib/schema";
 import PageHero from "@/components/PageHero";
 import SectionHeading from "@/components/SectionHeading";
 import Reveal from "@/components/Reveal";
@@ -11,10 +12,30 @@ import CTABanner from "@/components/CTABanner";
 export const metadata: Metadata = {
   title: "من نحن",
   description:
-    "تعرّف على قصة مكتبة طيف: مكتبة عربية مستقلة وُلدت من إيمان بأن الكتاب يغيّر الحياة. مختارات مدروسة، أسعار مناسبة، وطلب سهل عبر واتساب.",
+    "تعرّف على قصة مكتبة طيف (Phantom Library): رؤيتنا ورسالتنا في تقديم أفضل الكتب والروايات للقارئ العربي بشغف وعناية.",
+  alternates: {
+    canonical: "/about",
+  },
   openGraph: {
     title: "من نحن | مكتبة طيف",
-    description: "قصة مكتبة طيف — مكتبة عربية مستقلة بهوية كونية فاخرة.",
+    description:
+      "تعرّف على قصة مكتبة طيف (Phantom Library): رؤيتنا ورسالتنا في تقديم أفضل الكتب والروايات للقارئ العربي بشغف وعناية.",
+    url: `${storeConfig.siteUrl}/about`,
+    images: [
+      {
+        url: "/images/banners/hero.jpeg",
+        width: 1600,
+        height: 900,
+        alt: "من نحن | مكتبة طيف — Phantom Library",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "من نحن | مكتبة طيف",
+    description:
+      "تعرّف على قصة مكتبة طيف (Phantom Library): رؤيتنا ورسالتنا في تقديم أفضل الكتب والروايات للقارئ العربي بشغف وعناية.",
+    images: ["/images/banners/hero.jpeg"],
   },
 };
 
@@ -49,8 +70,17 @@ const stats = [
 ];
 
 export default function AboutPage() {
+  const breadcrumbs = getBreadcrumbSchema([
+    { name: "الرئيسية", url: "/" },
+    { name: "من نحن", url: "/about" },
+  ]);
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbs) }}
+      />
       <PageHero
         title="من نحن"
         description="طيفٌ من نور تقرؤه — مكتبة عربية مستقلة تؤمن بأن الكتاب الجيد يستحق أن يصل إلى قارئه بأسهل طريق ممكن."
@@ -73,7 +103,7 @@ export default function AboutPage() {
             />
             <Image
               src="/images/logo.jpeg"
-              alt="ركن قراءة دافئ داخل مكتبة طيف بإضاءة ذهبية ورفوف خشبية"
+              alt="شعار وهوية مكتبة طيف (Phantom Library) — بين صفحات الكتب تبدأ الحكايات"
               width={1024}
               height={768}
               className="relative aspect-[4/3] w-full rounded-[2rem] object-cover shadow-luxe"

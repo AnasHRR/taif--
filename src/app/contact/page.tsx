@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Clock, Mail, MapPin, MessageCircle, Phone, Send } from "lucide-react";
 import { storeConfig } from "@/config/store";
 import { buildGreetingMessage, getWhatsAppUrl } from "@/lib/whatsapp";
+import { getBreadcrumbSchema } from "@/lib/schema";
 import PageHero from "@/components/PageHero";
 import ContactForm from "@/components/ContactForm";
 import Reveal from "@/components/Reveal";
@@ -11,10 +12,30 @@ import { FacebookIcon, InstagramIcon} from "@/components/SocialIcons";
 export const metadata: Metadata = {
   title: "اتصل بنا",
   description:
-    "تواصل مع مكتبة طيف عبر واتساب أو الهاتف أو البريد الإلكتروني. نرد على استفساراتك عن الكتب والطلبات والتوصيل طوال أيام الأسبوع.",
+    "تواصل مع مكتبة طيف عبر واتساب أو الهاتف للاستفسار عن الكتب والطلبات وخدمة التوصيل السريع.",
+  alternates: {
+    canonical: "/contact",
+  },
   openGraph: {
     title: "اتصل بنا | مكتبة طيف",
-    description: "قناة واحدة مباشرة وسريعة: راسلنا عبر واتساب وسنرد بأنفسنا.",
+    description:
+      "تواصل مع مكتبة طيف عبر واتساب أو الهاتف للاستفسار عن الكتب والطلبات وخدمة التوصيل السريع.",
+    url: `${storeConfig.siteUrl}/contact`,
+    images: [
+      {
+        url: "/images/banners/hero.jpeg",
+        width: 1600,
+        height: 900,
+        alt: "اتصل بنا | مكتبة طيف — Phantom Library",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "اتصل بنا | مكتبة طيف",
+    description:
+      "تواصل مع مكتبة طيف عبر واتساب أو الهاتف للاستفسار عن الكتب والطلبات وخدمة التوصيل السريع.",
+    images: ["/images/banners/hero.jpeg"],
   },
 };
 
@@ -53,8 +74,17 @@ const socials = [
 ];
 
 export default function ContactPage() {
+  const breadcrumbs = getBreadcrumbSchema([
+    { name: "الرئيسية", url: "/" },
+    { name: "اتصل بنا", url: "/contact" },
+  ]);
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbs) }}
+      />
       <PageHero
         title="اتصل بنا"
         description="سؤال عن كتاب؟ استفسار عن طلب؟ اقتراح إصدار؟ يسعدنا حديثك دائماً — وقناتنا الأسرع هي واتساب."

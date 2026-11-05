@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Suspense } from "react";
 import { Library } from "lucide-react";
 import { books } from "@/data/books";
+import { storeConfig } from "@/config/store";
+import { getBreadcrumbSchema } from "@/lib/schema";
 import { booksCountLabel } from "@/lib/utils";
 import PageHero from "@/components/PageHero";
 import BooksBrowser from "@/components/BooksBrowser";
@@ -9,10 +11,30 @@ import BooksBrowser from "@/components/BooksBrowser";
 export const metadata: Metadata = {
   title: "جميع الكتب",
   description:
-    "تصفح كتالوج مكتبة طيف الكامل: روايات وتنمية بشرية وكتب دينية وتاريخ وفلسفة وعلوم وكتب أطفال ولغات. ابحث ورشّح ورتّب حسب ذوقك، واطلب عبر واتساب.",
+    "تصفح جميع الكتب واكتشف مجموعة متنوعة من الكتب والروايات في مكتبة طيف.",
+  alternates: {
+    canonical: "/books",
+  },
   openGraph: {
     title: "جميع الكتب | مكتبة طيف",
-    description: "كتالوج مكتبة طيف الكامل — ابحث ورشّح واطلب كتبك عبر واتساب.",
+    description:
+      "تصفح جميع الكتب واكتشف مجموعة متنوعة من الكتب والروايات في مكتبة طيف.",
+    url: `${storeConfig.siteUrl}/books`,
+    images: [
+      {
+        url: "/images/banners/hero.jpeg",
+        width: 1600,
+        height: 900,
+        alt: "جميع الكتب | مكتبة طيف — Phantom Library",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "جميع الكتب | مكتبة طيف",
+    description:
+      "تصفح جميع الكتب واكتشف مجموعة متنوعة من الكتب والروايات في مكتبة طيف.",
+    images: ["/images/banners/hero.jpeg"],
   },
 };
 
@@ -30,8 +52,17 @@ function BrowserFallback() {
 }
 
 export default function BooksPage() {
+  const breadcrumbs = getBreadcrumbSchema([
+    { name: "الرئيسية", url: "/" },
+    { name: "جميع الكتب", url: "/books" },
+  ]);
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbs) }}
+      />
       <PageHero
         title="جميع الكتب"
         description={`رفوفنا بين يديك: ${booksCountLabel(books.length)} مختارة بعناية. ابحث، رشّح حسب التصنيف أو السعر، ورتّب النتائج كما يناسبك.`}
