@@ -29,7 +29,7 @@ function getSharedObserver(): IntersectionObserver {
         }
       });
     },
-    { threshold: 0.12, rootMargin: "0px 0px -40px 0px" },
+    { threshold: 0, rootMargin: "0px 0px -40px 0px" },
   );
   return sharedObserver;
 }
@@ -42,6 +42,11 @@ export default function Reveal({ children, className, delay = 0 }: RevealProps) 
   useEffect(() => {
     const element = ref.current;
     if (!element) return;
+    // شبكة أمان: إن لم يكن تحويل القصّة مدعومًا أو فشل الالتقاط، يظهر المحتوى دائمًا
+    if (typeof IntersectionObserver === "undefined") {
+      setVisible(true);
+      return;
+    }
     const observer = getSharedObserver();
     observedTargets.set(element, setVisible);
     observer.observe(element);

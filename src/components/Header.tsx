@@ -29,6 +29,18 @@ export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
+  // Hydration safety: the nav "active" style depends on `usePathname()`,
+  // which differs between the static prerender (the internal path, e.g.
+  // /books) and the client after a rewrite (the public path, e.g.
+  // /library), and can also be `null` on the server. Rendering it on the
+  // first pass makes the server HTML differ from the client HTML.
+  // Defer it to after hydration so both sides render the same non-active
+  // style, then update without a hydration error.
+  const [activePathname, setActivePathname] = useState<string | null>(null);
+
+  useEffect(() => {
+    setActivePathname(pathname);
+  }, [pathname]);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 10);
@@ -84,7 +96,7 @@ export default function Header() {
           <Link
             href="/"
             className="group flex items-center gap-3 outline-none"
-            aria-label="مكتبة طيف (Phantom Library) — الصفحة الرئيسية"
+            aria-label="مكتبة طيف — الصفحة الرئيسية"
           >
             <span className="relative block size-11 shrink-0 overflow-hidden rounded-2xl bg-primary-deep shadow-gold ring-1 ring-gold/60 transition-transform duration-300 group-hover:scale-105 sm:size-14">
               {/* الشعار يُعرض بعرض 44/56px فقط — لا حاجة لأولوية LCP ولا لدقة 1070px */}
@@ -112,7 +124,7 @@ export default function Header() {
           <nav aria-label="التنقل الرئيسي" className="hidden lg:block">
             <ul className="flex items-center gap-1">
               {navLinks.map((link) => {
-                const active = isLinkActive(link.href, pathname, link.altPaths);
+                const active = isLinkActive(link.href, activePathname ?? "", link.altPaths);
                 return (
                   <li key={link.href + link.label}>
                     <Link
@@ -200,7 +212,7 @@ export default function Header() {
                     onClick={() => setMenuOpen(false)}
                     className={cx(
                       "flex items-center justify-between rounded-2xl px-4 py-3 font-display text-base font-bold transition-colors",
-                      isLinkActive(link.href, pathname, link.altPaths)
+                      isLinkActive(link.href, activePathname ?? "", link.altPaths)
                         ? "bg-primary text-cream"
                         : "text-ink/80 hover:bg-sand hover:text-primary",
                     )}

@@ -157,7 +157,7 @@ export default function Footer() {
 
       <div className="relative border-t border-cream/10">
         <div className="shell flex flex-col items-center justify-between gap-3 py-5 text-center text-xs text-cream/50 sm:flex-row">
-          <p>© {new Date(2025, 0, 1).getFullYear()} {storeConfig.name} — جميع الحقوق محفوظة.</p>
+          <p>© 2025 {storeConfig.name} — جميع الحقوق محفوظة.</p>
           <p className="inline-flex items-center gap-1.5">
             <MessageCircle className="size-3.5 text-gold" aria-hidden="true" />
             الطلب والتأكيد النهائي يتمان حصرياً عبر واتساب — لا حاجة لأي حساب أو تسجيل

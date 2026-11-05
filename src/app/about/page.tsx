@@ -157,10 +157,11 @@ export default function AboutPage() {
           {stats.map((stat, index) => (
             <Reveal key={stat.label} delay={index * 100}>
               <div className="text-center">
+                <dt className="sr-only">{stat.label}</dt>
                 <dd className="font-display text-3xl font-black text-gradient-gold sm:text-4xl" dir="ltr">
                   {stat.value}
                 </dd>
-                <dt className="mt-2 text-xs font-semibold text-cream/65 sm:text-sm">{stat.label}</dt>
+                <dd className="mt-2 text-xs font-semibold text-cream/65 sm:text-sm">{stat.label}</dd>
               </div>
             </Reveal>
           ))}
@@ -192,7 +193,7 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
-
+      
       <CTABanner />
     </>
   );

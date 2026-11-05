@@ -59,7 +59,7 @@ export default function HomePage() {
   const counts = getCategoryCounts();
   const featured = getFeaturedBooks();
   const newArrivals = getNewBooks();
-  const offers = getOfferBooks();
+  const offers = getOfferBooks(8);
 
   return (
     <>

@@ -139,7 +139,11 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   const organizationSchema = getOrganizationSchema();
 
   return (
-    <html lang="ar" dir="rtl" className={`${cairo.variable} ${tajawal.variable}`}>
+    // suppressHydrationWarning: browser extensions (Grammarly, translators,
+    // dark-mode add-ons) inject attributes onto <html>/<body> before React
+    // hydrates. Ignoring those attribute diffs is the recommended fix for
+    // extension-caused hydration errors; it does not silence real app diffs.
+    <html lang="ar" dir="rtl" suppressHydrationWarning className={`${cairo.variable} ${tajawal.variable}`}>
       <head>
         <script
           type="application/ld+json"
@@ -150,7 +154,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
         />
       </head>
-      <body className="flex min-h-screen flex-col bg-cream font-sans text-ink antialiased">
+      <body suppressHydrationWarning className="flex min-h-screen flex-col bg-cream font-sans text-ink antialiased">
         <CartProvider>
           <Header />
           <main id="main-content" className="flex-1">
