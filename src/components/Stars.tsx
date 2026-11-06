@@ -29,7 +29,7 @@ interface StarsProps {
 /** طبقة نجوم متلألئة تُستخدم فوق الخلفيات الداكنة */
 export default function Stars({ count = 26, className }: StarsProps) {
   return (
-    <div aria-hidden="true" className={cx("pointer-events-none absolute inset-0 overflow-hidden", className)}>
+    <div aria-hidden="true" className={cx("stars-layer pointer-events-none absolute inset-0 overflow-hidden", className)}>
       {buildStars(count).map((star, index) => (
         <span
           key={index}

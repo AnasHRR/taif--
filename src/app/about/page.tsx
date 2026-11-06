@@ -106,7 +106,9 @@ export default function AboutPage() {
               alt="شعار وهوية مكتبة طيف (Phantom Library) — بين صفحات الكتب تبدأ الحكايات"
               width={1024}
               height={768}
+              sizes="(max-width: 1024px) 100vw, 50vw"
               className="relative aspect-[4/3] w-full rounded-[2rem] object-cover shadow-luxe"
+              loading="lazy"
             />
             <div className="absolute -bottom-6 right-6 rounded-3xl border border-gold/30 bg-primary px-6 py-4 text-cream shadow-luxe">
               <p className="font-display text-2xl font-black text-gold-light" dir="ltr">
@@ -155,10 +157,11 @@ export default function AboutPage() {
           {stats.map((stat, index) => (
             <Reveal key={stat.label} delay={index * 100}>
               <div className="text-center">
+                <dt className="sr-only">{stat.label}</dt>
                 <dd className="font-display text-3xl font-black text-gradient-gold sm:text-4xl" dir="ltr">
                   {stat.value}
                 </dd>
-                <dt className="mt-2 text-xs font-semibold text-cream/65 sm:text-sm">{stat.label}</dt>
+                <dd className="mt-2 text-xs font-semibold text-cream/65 sm:text-sm">{stat.label}</dd>
               </div>
             </Reveal>
           ))}
@@ -190,7 +193,7 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
-
+      
       <CTABanner />
     </>
   );

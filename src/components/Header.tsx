@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import dynamic from "next/dynamic";
 import { usePathname } from "next/navigation";
 import { Menu, MessageCircle, Phone, Search, ShoppingBasket, Truck, X } from "lucide-react";
 import { storeConfig } from "@/config/store";
@@ -10,7 +11,9 @@ import { navLinks } from "@/config/navigation";
 import { buildGreetingMessage, getWhatsAppUrl } from "@/lib/whatsapp";
 import { useCart } from "@/hooks/useCart";
 import { cx } from "@/lib/utils";
-import HeaderSearch from "@/components/HeaderSearch";
+
+/** البحث التفاعلي — يُحمَّل عند الحاجة فقط (ليس في مسار الرسم الأول). */
+const HeaderSearch = dynamic(() => import("@/components/HeaderSearch"), { ssr: false });
 
 function isLinkActive(href: string, pathname: string, altPaths: string[] = []): boolean {
   if (href.includes("?")) return false;
@@ -26,6 +29,18 @@ export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
+  // Hydration safety: the nav "active" style depends on `usePathname()`,
+  // which differs between the static prerender (the internal path, e.g.
+  // /books) and the client after a rewrite (the public path, e.g.
+  // /library), and can also be `null` on the server. Rendering it on the
+  // first pass makes the server HTML differ from the client HTML.
+  // Defer it to after hydration so both sides render the same non-active
+  // style, then update without a hydration error.
+  const [activePathname, setActivePathname] = useState<string | null>(null);
+
+  useEffect(() => {
+    setActivePathname(pathname);
+  }, [pathname]);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 10);
@@ -72,7 +87,7 @@ export default function Header() {
         className={cx(
           "sticky top-0 z-50 border-b transition-all duration-500",
           scrolled
-            ? "border-primary/10 bg-cream/90 shadow-card backdrop-blur-xl"
+            ? "border-primary/10 bg-cream/95 shadow-card backdrop-blur-md"
             : "border-transparent bg-cream",
         )}
       >
@@ -81,16 +96,18 @@ export default function Header() {
           <Link
             href="/"
             className="group flex items-center gap-3 outline-none"
-            aria-label="مكتبة طيف (Phantom Library) — الصفحة الرئيسية"
+            aria-label="مكتبة طيف — الصفحة الرئيسية"
           >
             <span className="relative block size-11 shrink-0 overflow-hidden rounded-2xl bg-primary-deep shadow-gold ring-1 ring-gold/60 transition-transform duration-300 group-hover:scale-105 sm:size-14">
+              {/* الشعار يُعرض بعرض 44/56px فقط — لا حاجة لأولوية LCP ولا لدقة 1070px */}
               <Image
                 src="/images/logo.jpeg"
-                alt="شعار مكتبة طيف — Phantom Library"
-                width={1070}
-                height={1070}
+                alt="شعار مكتبة طيف"
+                width={112}
+                height={112}
+                sizes="56px"
+                fetchPriority="low"
                 className="size-full object-contain"
-                priority
               />
             </span>
             <span className="flex flex-col">
@@ -107,7 +124,7 @@ export default function Header() {
           <nav aria-label="التنقل الرئيسي" className="hidden lg:block">
             <ul className="flex items-center gap-1">
               {navLinks.map((link) => {
-                const active = isLinkActive(link.href, pathname, link.altPaths);
+                const active = isLinkActive(link.href, activePathname ?? "", link.altPaths);
                 return (
                   <li key={link.href + link.label}>
                     <Link
@@ -182,7 +199,7 @@ export default function Header() {
         {/* قائمة الجوال */}
         <div
           className={cx(
-            "grid overflow-hidden border-primary/10 bg-cream/95 backdrop-blur-xl transition-all duration-500 ease-out lg:hidden",
+            "grid overflow-hidden border-primary/10 bg-cream/95 transition-all duration-500 ease-out lg:hidden",
             menuOpen ? "grid-rows-[1fr] border-t" : "grid-rows-[0fr]",
           )}
         >
@@ -195,7 +212,7 @@ export default function Header() {
                     onClick={() => setMenuOpen(false)}
                     className={cx(
                       "flex items-center justify-between rounded-2xl px-4 py-3 font-display text-base font-bold transition-colors",
-                      isLinkActive(link.href, pathname, link.altPaths)
+                      isLinkActive(link.href, activePathname ?? "", link.altPaths)
                         ? "bg-primary text-cream"
                         : "text-ink/80 hover:bg-sand hover:text-primary",
                     )}

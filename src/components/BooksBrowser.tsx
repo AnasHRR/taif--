@@ -52,12 +52,15 @@ export default function BooksBrowser({ presetFilter }: BooksBrowserProps = {}) {
   const searchParams = useSearchParams();
   const paramsString = searchParams.toString();
 
-  const [query, setQuery] = useState(() => searchParams.get("q") ?? "");
-  const [category, setCategory] = useState(() => searchParams.get("category") ?? "all");
-  const [quickFilter, setQuickFilter] = useState<QuickFilter>(() => {
-    const value = searchParams.get("filter");
-    return value === "new" || value === "offers" ? value : (presetFilter ?? "");
-  });
+  // Hydration safety: initialize from `searchParams` during the first render
+  // makes the client HTML differ from the statically prerendered server HTML
+  // (which has no query string). Start with the neutral defaults — the same
+  // values the server renders — and let the sync effect below adopt the URL
+  // values after hydration. (The page already wraps this component in
+  // <Suspense>; it is kept so the prerender still streams the fallback.)
+  const [query, setQuery] = useState("");
+  const [category, setCategory] = useState("all");
+  const [quickFilter, setQuickFilter] = useState<QuickFilter>(presetFilter ?? "");
   const [sort, setSort] = useState<SortKey>("recommended");
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");

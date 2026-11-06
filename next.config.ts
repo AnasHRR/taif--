@@ -20,17 +20,46 @@ import type { NextConfig } from "next";
 const isStaticExport = process.env.NEXT_OUTPUT === "export";
 
 const nextConfig: NextConfig = {
+  compress: true,
   // Enable `output: "export"` for static hosting builds.
   output: isStaticExport ? "export" : undefined,
   // Static hosts (e.g. GitHub Pages) resolve directories better with trailing slashes.
   trailingSlash: isStaticExport,
-  // `next/image` without the optimization server — required for static export.
-  images: {
-    unoptimized: true,
+  // On Netlify (Next.js runtime) the optimizer serves responsive WebP/AVIF
+  // derivatives — a mobile device only downloads the width it actually needs.
+  // `unoptimized: true` is only required for the static-export build where
+  // no image-optimization server exists.
+  images: isStaticExport
+    ? { unoptimized: true }
+    : {
+        formats: ["image/avif", "image/webp"],
+        // Mobile-first sizes keep phones on small (cheap) derivatives.
+        deviceSizes: [320, 384, 480, 640, 828, 1080, 1200],
+        imageSizes: [16, 32, 48, 64, 96, 112, 128, 256],
+        minimumCacheTTL: 86400,
+        dangerouslyAllowSVG: false,
+        contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+      },
+  compiler: {
+    removeConsole: process.env.NODE_ENV === "production" ? { exclude: ["error", "warn"] } : false,
   },
   experimental: {
-    cpus: 1,
+    // Tree-shake the icon set so mobile JS only ships the icons actually used.
+    optimizePackageImports: ["lucide-react"],
   },
+  async headers() {
+    return [
+      {
+        source: "/_next/static/:path*",
+        headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }],
+      },
+      {
+        source: "/images/:path*",
+        headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }],
+      },
+    ];
+  },
+  poweredByHeader: false,
 
   /**
    * روابط عامة أنيقة تعيد التوجيه داخلياً إلى الصفحات الحقيقية.

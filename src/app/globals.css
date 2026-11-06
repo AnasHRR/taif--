@@ -16,8 +16,8 @@
   --color-ink: #25212b;
   --color-mist: #6e6780;
 
-  --font-display: "Cairo Variable", "Cairo", "Tajawal", ui-sans-serif, system-ui, sans-serif;
-  --font-sans: "Tajawal", "Cairo Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-cairo), "Cairo Variable", "Cairo", "Tajawal", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-tajawal), "Tajawal", "Cairo Variable", ui-sans-serif, system-ui, sans-serif;
 
   --shadow-card: 0 14px 40px -18px rgb(36 16 47 / 0.28);
   --shadow-luxe: 0 30px 70px -28px rgb(36 16 47 / 0.5);
@@ -150,29 +150,28 @@ html {
     inset 0 0 60px rgb(0 0 0 / 0.25);
 }
 
-/* Scroll reveal (triggered by <Reveal />) */
+/* Scroll reveal (triggered by <Reveal />) — compositor-only (opacity + transform).
+   No filter:blur: animating blur on mobile forces expensive GPU repaint
+   of large sections and inflates TBT/long-tasks. */
 .reveal {
   opacity: 0;
-  transform: translateY(30px);
-  filter: blur(5px);
+  transform: translateY(16px);
   transition:
-    opacity 0.9s ease,
-    transform 0.9s cubic-bezier(0.22, 0.61, 0.36, 1),
-    filter 0.9s ease;
+    opacity 0.7s ease,
+    transform 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
   transition-delay: var(--reveal-delay, 0ms);
   will-change: opacity, transform;
+  content-visibility: auto;
 }
 .reveal.is-visible {
   opacity: 1;
   transform: none;
-  filter: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
   .reveal {
     opacity: 1;
     transform: none;
-    filter: none;
     transition: none;
   }
   *,
@@ -180,5 +179,33 @@ html {
   *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
+  }
+}
+
+/* Below-the-fold sections should not inflate initial paint cost */
+.below-fold {
+  content-visibility: auto;
+  contain-intrinsic-size: 600px;
+}
+
+/* Reduce GPU cost of decorative blurs on phones (brand colors unchanged) */
+@media (max-width: 1023px) {
+  .blur-3xl {
+    --tw-blur: blur(28px);
+  }
+  /* Only show every second star on small screens — halves compositing work */
+  .stars-layer > span:nth-child(even) {
+    display: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .stars-layer > span,
+  .animate-twinkle,
+  .animate-marquee,
+  .animate-float-slow,
+  .animate-float-slower,
+  .animate-bounce-soft,
+  .animate-ping {
+    animation: none !important;
   }
 }

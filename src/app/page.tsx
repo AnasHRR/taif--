@@ -1,20 +1,27 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import { ArrowLeft, BadgePercent, Sparkles } from "lucide-react";
 import { getCategoryCounts, getFeaturedBooks, getNewBooks, getOfferBooks } from "@/data/books";
 import { categories } from "@/data/categories";
 import { storeConfig } from "@/config/store";
 import Hero from "@/components/Hero";
-import QuoteMarquee from "@/components/QuoteMarquee";
 import SectionHeading from "@/components/SectionHeading";
 import CategoryCard from "@/components/CategoryCard";
 import BookGrid from "@/components/BookGrid";
 import BookCard from "@/components/BookCard";
-import ScrollRow from "@/components/ScrollRow";
-import WhyChooseUs from "@/components/WhyChooseUs";
-import CTABanner from "@/components/CTABanner";
 import Reveal from "@/components/Reveal";
 import Stars from "@/components/Stars";
+
+/**
+ * Below-the-fold sections are code-split so the hero + first paint
+ * do not download their JS up front on mobile (TBT / LCP). SSR output
+ * is preserved — this only defers hydration, not rendering.
+ */
+const QuoteMarquee = dynamic(() => import("@/components/QuoteMarquee"));
+const ScrollRow = dynamic(() => import("@/components/ScrollRow"));
+const WhyChooseUs = dynamic(() => import("@/components/WhyChooseUs"));
+const CTABanner = dynamic(() => import("@/components/CTABanner"));
 
 export const metadata: Metadata = {
   title: {
@@ -52,7 +59,7 @@ export default function HomePage() {
   const counts = getCategoryCounts();
   const featured = getFeaturedBooks();
   const newArrivals = getNewBooks();
-  const offers = getOfferBooks();
+  const offers = getOfferBooks(8);
 
   return (
     <>
@@ -60,7 +67,7 @@ export default function HomePage() {
       <QuoteMarquee />
 
       {/* ─── التصنيفات ─────────────────────────────────────────── */}
-      <section id="categories" className="scroll-mt-24 py-20 sm:py-24" aria-label="تصنيفات الكتب">
+      <section id="categories" className="below-fold scroll-mt-24 py-20 sm:py-24" aria-label="تصنيفات الكتب">
         <div className="shell">
           <Reveal>
             <SectionHeading
@@ -80,7 +87,7 @@ export default function HomePage() {
       </section>
 
       {/* ─── كتب مختارة ────────────────────────────────────────── */}
-      <section className="bg-sand/60 py-20 sm:py-24" aria-label="كتب مختارة">
+      <section className="below-fold bg-sand/60 py-20 sm:py-24" aria-label="كتب مختارة">
         <div className="shell">
           <Reveal>
             <SectionHeading
@@ -107,7 +114,7 @@ export default function HomePage() {
       </section>
 
       {/* ─── وصل حديثاً ────────────────────────────────────────── */}
-      <section className="py-20 sm:py-24" aria-label="وصل حديثاً">
+      <section className="below-fold py-20 sm:py-24" aria-label="وصل حديثاً">
         <div className="shell">
           <Reveal>
             <SectionHeading
@@ -130,7 +137,7 @@ export default function HomePage() {
       </section>
 
       {/* ─── العروض الخاصة ─────────────────────────────────────── */}
-      <section className="stars-pattern relative overflow-hidden bg-primary-deep py-20 sm:py-24" aria-label="العروض الخاصة">
+      <section className="below-fold stars-pattern relative overflow-hidden bg-primary-deep py-20 sm:py-24" aria-label="العروض الخاصة">
         <Stars count={24} />
         <div aria-hidden="true" className="absolute -left-24 top-0 size-96 rounded-full bg-secondary/30 blur-3xl" />
         <div aria-hidden="true" className="absolute -right-24 bottom-0 size-96 rounded-full bg-gold/10 blur-3xl" />
