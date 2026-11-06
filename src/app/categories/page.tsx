@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     url: `${storeConfig.siteUrl}/categories`,
     images: [
       {
-        url: "/images/banners/hero.jpeg",
+        url: "/images/banners/hero.webp",
         width: 1600,
         height: 900,
         alt: "تصنيفات الكتب | مكتبة طيف — Phantom Library",
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     title: "تصنيفات الكتب | مكتبة طيف",
     description:
       "اكتشف تصنيفات الكتب المختلفة واختر الكتب المناسبة لاهتماماتك.",
-    images: ["/images/banners/hero.jpeg"],
+    images: ["/images/banners/hero.webp"],
   },
 };
 

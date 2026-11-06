@@ -42,11 +42,23 @@ export default function Header() {
     setActivePathname(pathname);
   }, [pathname]);
 
+  // rAF-throttled scroll listener: at most one layout read per frame and no
+  // synchronous `window.scrollY` read during mount (avoids forced reflow).
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 10);
-    onScroll();
+    let frame = 0;
+    const update = () => {
+      frame = 0;
+      setScrolled(window.scrollY > 10);
+    };
+    const onScroll = () => {
+      if (frame === 0) frame = window.requestAnimationFrame(update);
+    };
+    frame = window.requestAnimationFrame(update);
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    return () => {
+      window.cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", onScroll);
+    };
   }, []);
 
   // إغلاق قائمة الجوال عند تغيّر الصفحة
@@ -101,10 +113,10 @@ export default function Header() {
             <span className="relative block size-11 shrink-0 overflow-hidden rounded-2xl bg-primary-deep shadow-gold ring-1 ring-gold/60 transition-transform duration-300 group-hover:scale-105 sm:size-14">
               {/* الشعار يُعرض بعرض 44/56px فقط — لا حاجة لأولوية LCP ولا لدقة 1070px */}
               <Image
-                src="/images/logo.jpeg"
+                src="/images/logo.webp"
                 alt="شعار مكتبة طيف"
-                width={112}
-                height={112}
+                width={128}
+                height={128}
                 sizes="56px"
                 fetchPriority="low"
                 className="size-full object-contain"

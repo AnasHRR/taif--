@@ -46,6 +46,9 @@ const nextConfig: NextConfig = {
   experimental: {
     // Tree-shake the icon set so mobile JS only ships the icons actually used.
     optimizePackageImports: ["lucide-react"],
+    // Inline the page CSS into the prerendered HTML: removes the render-blocking
+    // stylesheet request (≈80 ms on mobile) for these fully static pages.
+    inlineCss: true,
   },
   async headers() {
     return [

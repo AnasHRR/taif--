@@ -2,8 +2,10 @@ import { getCategoryBySlug } from "@/data/categories";
 import type { Book } from "@/data/books";
 import { cx } from "@/lib/utils";
 
+type CoverBook = Pick<Book, "id" | "title" | "author" | "category">;
+
 interface BookCoverProps {
-  book: Book;
+  book: CoverBook;
   /** xs مصغّرة زخرفية — sm للبطاقات — lg لصفحة التفاصيل — hero للنسخ الطافية */
   size?: "xs" | "sm" | "lg" | "hero";
   className?: string;

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Image from "next/image";
+import { preload } from "react-dom";
 import { ArrowLeft, ChevronDown, MessageCircle, Sparkles } from "lucide-react";
 import { getFeaturedBooks } from "@/data/books";
 import { buildGreetingMessage, getWhatsAppUrl } from "@/lib/whatsapp";
@@ -15,21 +15,49 @@ const floatingCoverStyles = [
 export default function Hero() {
   const featured = getFeaturedBooks(3);
 
+  // Preload the exact hero derivative each viewport will use, so the LCP image
+  // starts downloading during HTML parsing instead of after CSS/JS. React
+  // deduplicates these and emits a single <link> per variant in <head>.
+  preload("/images/banners/hero-sm.webp", {
+    as: "image",
+    type: "image/webp",
+    media: "(max-width: 640px)",
+    fetchPriority: "high",
+  });
+  preload("/images/banners/hero-md.webp", {
+    as: "image",
+    type: "image/webp",
+    media: "(min-width: 641px) and (max-width: 1024px)",
+    fetchPriority: "high",
+  });
+  preload("/images/banners/hero.webp", {
+    as: "image",
+    type: "image/webp",
+    media: "(min-width: 1025px)",
+    fetchPriority: "high",
+  });
+
   return (
-    <section className="relative overflow-hidden bg-primary text-cream">
-      {/* خلفية كونية — عنصر LCP: يُحمَل بأولوية عالية دون كسل،
-          ويُقدَّم للموبايل بدرجة دقة منخفضة وجودة مضغوطة. */}
+    <>
+      <section className="relative overflow-hidden bg-primary text-cream">
+      {/* خلفية كونية — عنصر LCP: نقدّم نسخة WebP مضغوطة ومناسبة للشاشة
+          (31/75/139 ك.ب بدل صورة واحدة ثقيلة) مع أبعاد ثابتة لتفادي CLS. */}
       <div className="absolute inset-0">
-        <Image
-          src="/images/banners/hero.jpeg"
-          alt="مكتبة طيف (Phantom Library) — مكتبة إلكترونية لاستكشاف الكتب والروايات وعالم القراءة"
-          fill
-          priority
-          fetchPriority="high"
-          quality={72}
-          sizes="(max-width: 640px) 640px, (max-width: 1024px) 1024px, 1671px"
-          className="object-cover object-[72%_50%] opacity-85 lg:object-center lg:opacity-100"
-        />
+        <picture className="contents">
+          <source media="(max-width: 640px)" srcSet="/images/banners/hero-sm.webp" type="image/webp" />
+          <source media="(max-width: 1024px)" srcSet="/images/banners/hero-md.webp" type="image/webp" />
+          <source srcSet="/images/banners/hero.webp" type="image/webp" />
+          <img
+            src="/images/banners/hero.webp"
+            alt="مكتبة طيف (Phantom Library) — مكتبة إلكترونية لاستكشاف الكتب والروايات وعالم القراءة"
+            width={1600}
+            height={901}
+            fetchPriority="high"
+            loading="eager"
+            decoding="async"
+            className="size-full object-cover object-[72%_50%] opacity-85 lg:object-center lg:opacity-100"
+          />
+        </picture>
         {/* تدرّج بنفسجي خفيف لضبط قراءة النص فوق الصورة دون إخفائها */}
         <div className="absolute inset-0 bg-gradient-to-l from-primary/90 via-primary/55 to-primary/15" />
         <div className="absolute inset-0 bg-gradient-to-r from-primary/75 via-primary/25 to-transparent" />
@@ -116,6 +144,7 @@ export default function Hero() {
         <span className="text-[11px] font-semibold tracking-widest">اكتشف المزيد</span>
         <ChevronDown className="size-4 animate-bounce-soft" aria-hidden="true" />
       </a>
-    </section>
+      </section>
+    </>
   );
 }

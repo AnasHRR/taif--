@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     url: `${storeConfig.siteUrl}/contact`,
     images: [
       {
-        url: "/images/banners/hero.jpeg",
+        url: "/images/banners/hero.webp",
         width: 1600,
         height: 900,
         alt: "اتصل بنا | مكتبة طيف — Phantom Library",
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     title: "اتصل بنا | مكتبة طيف",
     description:
       "تواصل مع مكتبة طيف عبر واتساب أو الهاتف للاستفسار عن الكتب والطلبات وخدمة التوصيل السريع.",
-    images: ["/images/banners/hero.jpeg"],
+    images: ["/images/banners/hero.webp"],
   },
 };
 

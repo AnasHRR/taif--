@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     url: `${storeConfig.siteUrl}/special-offers`,
     images: [
       {
-        url: "/images/banners/hero.jpeg",
+        url: "/images/banners/hero.webp",
         width: 1600,
         height: 900,
         alt: "عروض الكتب والتخفيضات | مكتبة طيف — Phantom Library",
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     title: "عروض الكتب والتخفيضات | مكتبة طيف",
     description:
       "اكتشف عروض وتخفيضات مكتبة طيف على مختارات مميزة من أفضل الكتب والروايات بأسعار خاصة.",
-    images: ["/images/banners/hero.jpeg"],
+    images: ["/images/banners/hero.webp"],
   },
 };
 

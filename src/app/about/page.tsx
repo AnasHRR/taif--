@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     url: `${storeConfig.siteUrl}/about`,
     images: [
       {
-        url: "/images/banners/hero.jpeg",
+        url: "/images/banners/hero.webp",
         width: 1600,
         height: 900,
         alt: "من نحن | مكتبة طيف — Phantom Library",
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     title: "من نحن | مكتبة طيف",
     description:
       "تعرّف على قصة مكتبة طيف (Phantom Library): رؤيتنا ورسالتنا في تقديم أفضل الكتب والروايات للقارئ العربي بشغف وعناية.",
-    images: ["/images/banners/hero.jpeg"],
+    images: ["/images/banners/hero.webp"],
   },
 };
 
@@ -102,7 +102,7 @@ export default function AboutPage() {
               className="absolute -inset-5 rounded-[2.5rem] bg-gradient-to-br from-gold/30 via-transparent to-secondary/20 blur-2xl"
             />
             <Image
-              src="/images/logo.jpeg"
+              src="/images/logo-large.webp"
               alt="شعار وهوية مكتبة طيف (Phantom Library) — بين صفحات الكتب تبدأ الحكايات"
               width={1024}
               height={768}

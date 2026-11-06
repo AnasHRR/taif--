@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     url: storeConfig.siteUrl,
     images: [
       {
-        url: "/images/banners/hero.jpeg",
+        url: "/images/banners/hero.webp",
         width: 1600,
         height: 900,
         alt: "مكتبة طيف | عالم الكتب والقراءة — Phantom Library",
@@ -51,7 +51,7 @@ export const metadata: Metadata = {
     title: "مكتبة طيف | عالم الكتب والقراءة",
     description:
       "اكتشف مكتبة طيف وتصفح مجموعة متنوعة من الكتب والروايات والمراجع في مختلف المجالات.",
-    images: ["/images/banners/hero.jpeg"],
+    images: ["/images/banners/hero.webp"],
   },
 };
 

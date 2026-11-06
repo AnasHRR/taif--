@@ -53,7 +53,7 @@ export async function generateMetadata({ params }: BookPageProps): Promise<Metad
       url: `${storeConfig.siteUrl}/books/${book.slug}`,
       images: [
         {
-          url: "/images/banners/hero.jpeg",
+          url: "/images/banners/hero.webp",
           width: 1600,
           height: 900,
           alt: `${book.title} — ${book.author}`,
@@ -64,7 +64,7 @@ export async function generateMetadata({ params }: BookPageProps): Promise<Metad
       card: "summary_large_image",
       title: `${book.title} — ${book.author} | مكتبة طيف`,
       description: book.description,
-      images: ["/images/banners/hero.jpeg"],
+      images: ["/images/banners/hero.webp"],
     },
     keywords: [
       book.title,

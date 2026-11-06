@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
-import dynamic from "next/dynamic";
 import { Cairo, Tajawal } from "next/font/google";
 import "./globals.css";
 
@@ -9,16 +8,8 @@ import { getOrganizationSchema, getWebSiteSchema } from "@/lib/schema";
 import { CartProvider } from "@/context/CartContext";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-
-/**
- * Non-critical overlays are code-split so the LCP-critical hero paints
- * before their JS is even requested on mobile.
- * NOTE: `ssr: false` is not allowed in Server Components — the split
- * still defers hydration JS without it; SSR markup is preserved.
- */
-const ShoppingCart = dynamic(() => import("@/components/ShoppingCart"));
-const CartToast = dynamic(() => import("@/components/CartToast"));
-const WhatsAppButton = dynamic(() => import("@/components/WhatsAppButton"));
+import CartOverlays from "@/components/CartOverlays";
+import WhatsAppButton from "@/components/WhatsAppButton";
 
 /**
  * Arabic fonts via next/font (instead of @fontsource CSS imports):
@@ -112,17 +103,17 @@ export const metadata: Metadata = {
     title: "مكتبة طيف | بين صفحات الكتب تبدأ الحكايات",
     description:
       "وجهتك العربية الفاخرة للكتب — مختارات مدروسة وأسعار مناسبة وطلب سهل عبر واتساب.",
-    images: [{ url: "/images/banners/hero.jpeg", width: 1671, height: 941, alt: "مكتبة طيف — مكتبة كونية بين النجوم" }],
+    images: [{ url: "/images/banners/hero.webp", width: 1600, height: 901, alt: "مكتبة طيف — مكتبة كونية بين النجوم" }],
   },
   twitter: {
     card: "summary_large_image",
     title: `${storeConfig.title} — ${storeConfig.nameLatin}`,
     description: storeConfig.description,
-    images: ["/images/banners/hero.jpeg"],
+    images: ["/images/banners/hero.webp"],
   },
   icons: {
-    icon: [{ url: "/images/logo.jpeg", type: "image/jpeg" }],
-    apple: [{ url: "/images/logo.jpeg" }],
+    icon: [{ url: "/favicon-32.png", type: "image/png", sizes: "32x32" }],
+    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180" }],
   },
   verification: googleVerification ? { google: googleVerification } : undefined,
 };
@@ -161,8 +152,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             {children}
           </main>
           <Footer />
-          <ShoppingCart />
-          <CartToast />
+          <CartOverlays />
           <WhatsAppButton />
         </CartProvider>
       </body>

@@ -36,10 +36,10 @@ export default function Footer() {
           <div className="flex items-center gap-3">
             <span className="relative block size-14 shrink-0 overflow-hidden rounded-2xl bg-primary-deep shadow-gold ring-1 ring-gold/60">
               <Image
-                src="/images/logo.jpeg"
+                src="/images/logo.webp"
                 alt="شعار مكتبة طيف"
-                width={112}
-                height={112}
+                width={128}
+                height={128}
                 sizes="56px"
                 fetchPriority="low"
                 className="size-full object-contain"

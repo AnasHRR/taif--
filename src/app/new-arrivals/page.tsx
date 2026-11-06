@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     url: `${storeConfig.siteUrl}/new-arrivals`,
     images: [
       {
-        url: "/images/banners/hero.jpeg",
+        url: "/images/banners/hero.webp",
         width: 1600,
         height: 900,
         alt: "أحدث الكتب | مكتبة طيف — Phantom Library",
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "أحدث الكتب | مكتبة طيف",
     description: "اكتشف أحدث الكتب والإصدارات الجديدة في مكتبة طيف.",
-    images: ["/images/banners/hero.jpeg"],
+    images: ["/images/banners/hero.webp"],
   },
 };
 

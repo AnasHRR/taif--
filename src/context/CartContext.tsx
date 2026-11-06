@@ -9,15 +9,15 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import { getBookById, type Book } from "@/data/books";
+import { isCartBook, type CartBook } from "@/lib/cart";
 
 export interface CartItem {
-  book: Book;
+  book: CartBook;
   quantity: number;
 }
 
 interface StoredEntry {
-  id: string;
+  book: CartBook;
   quantity: number;
 }
 
@@ -28,7 +28,7 @@ interface CartContextValue {
   /** المجموع الإجمالي بالدرهم */
   total: number;
   hydrated: boolean;
-  addItem: (bookId: string, quantity?: number) => void;
+  addItem: (book: CartBook, quantity?: number) => void;
   removeItem: (bookId: string) => void;
   updateQuantity: (bookId: string, quantity: number) => void;
   clearCart: () => void;
@@ -42,7 +42,7 @@ interface CartContextValue {
 
 const CartContext = createContext<CartContextValue | null>(null);
 
-const STORAGE_KEY = "taif-cart-v1";
+const STORAGE_KEY = "taif-cart-v2";
 
 export function CartProvider({ children }: { children: ReactNode }) {
   const [entries, setEntries] = useState<StoredEntry[]>([]);
@@ -61,9 +61,9 @@ export function CartProvider({ children }: { children: ReactNode }) {
             (entry): entry is StoredEntry =>
               typeof entry === "object" &&
               entry !== null &&
-              typeof (entry as StoredEntry).id === "string" &&
+              isCartBook((entry as StoredEntry).book) &&
               typeof (entry as StoredEntry).quantity === "number" &&
-              getBookById((entry as StoredEntry).id) !== undefined,
+              (entry as StoredEntry).quantity > 0,
           );
           setEntries(valid);
         }
@@ -91,22 +91,21 @@ export function CartProvider({ children }: { children: ReactNode }) {
     return () => clearTimeout(timer);
   }, [toast]);
 
-  const addItem = useCallback((bookId: string, quantity = 1) => {
+  const addItem = useCallback((book: CartBook, quantity = 1) => {
     setEntries((previous) => {
-      const index = previous.findIndex((entry) => entry.id === bookId);
+      const index = previous.findIndex((entry) => entry.book.id === book.id);
       if (index >= 0) {
         const copy = [...previous];
         copy[index] = { ...copy[index], quantity: Math.min(copy[index].quantity + quantity, 99) };
         return copy;
       }
-      return [...previous, { id: bookId, quantity }];
+      return [...previous, { book, quantity }];
     });
-    const book = getBookById(bookId);
-    setToast(book ? `أُضيف «${book.title}» إلى السلة` : "أُضيف الكتاب إلى السلة");
+    setToast(`أُضيف «${book.title}» إلى السلة`);
   }, []);
 
   const removeItem = useCallback((bookId: string) => {
-    setEntries((previous) => previous.filter((entry) => entry.id !== bookId));
+    setEntries((previous) => previous.filter((entry) => entry.book.id !== bookId));
   }, []);
 
   const updateQuantity = useCallback(
@@ -117,7 +116,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
       }
       setEntries((previous) =>
         previous.map((entry) =>
-          entry.id === bookId ? { ...entry, quantity: Math.min(quantity, 99) } : entry,
+          entry.book.id === bookId ? { ...entry, quantity: Math.min(quantity, 99) } : entry,
         ),
       );
     },
@@ -130,11 +129,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const dismissToast = useCallback(() => setToast(null), []);
 
   const items = useMemo<CartItem[]>(
-    () =>
-      entries.flatMap((entry) => {
-        const book = getBookById(entry.id);
-        return book ? [{ book, quantity: entry.quantity }] : [];
-      }),
+    () => entries.map(({ book, quantity }) => ({ book, quantity })),
     [entries],
   );
 

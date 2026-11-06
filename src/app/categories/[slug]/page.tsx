@@ -40,7 +40,7 @@ export async function generateMetadata({ params }: CategoryPageProps): Promise<M
       url: `${storeConfig.siteUrl}/categories/${category.slug}`,
       images: [
         {
-          url: "/images/banners/hero.jpeg",
+          url: "/images/banners/hero.webp",
           width: 1600,
           height: 900,
           alt: `${category.name} | مكتبة طيف — Phantom Library`,
@@ -51,7 +51,7 @@ export async function generateMetadata({ params }: CategoryPageProps): Promise<M
       card: "summary_large_image",
       title: `${category.name} | مكتبة طيف`,
       description,
-      images: ["/images/banners/hero.jpeg"],
+      images: ["/images/banners/hero.webp"],
     },
   };
 }

@@ -2,6 +2,7 @@
 
 import { ShoppingBasket, Ban } from "lucide-react";
 import type { Book } from "@/data/books";
+import { toCartBook } from "@/lib/cart";
 import { useCart } from "@/hooks/useCart";
 import { cx } from "@/lib/utils";
 
@@ -46,7 +47,7 @@ export default function AddToCartButton({ book, variant = "icon", quantity = 1, 
     return (
       <button
         type="button"
-        onClick={() => addItem(book.id, quantity)}
+        onClick={() => addItem(toCartBook(book), quantity)}
         className={cx(
           "group inline-flex items-center justify-center gap-2.5 rounded-full bg-primary px-7 py-3.5 text-sm font-bold text-cream shadow-card",
           "transition-all duration-300 hover:-translate-y-0.5 hover:bg-secondary hover:shadow-luxe active:translate-y-0",
@@ -63,7 +64,7 @@ export default function AddToCartButton({ book, variant = "icon", quantity = 1, 
   return (
     <button
       type="button"
-      onClick={() => addItem(book.id, quantity)}
+      onClick={() => addItem(toCartBook(book), quantity)}
       className={cx(
         "grid size-10 place-items-center rounded-full bg-primary text-cream shadow-card",
         "transition-all duration-300 hover:scale-110 hover:bg-secondary active:scale-95",

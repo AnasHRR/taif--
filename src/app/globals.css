@@ -161,7 +161,6 @@ html {
     transform 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
   transition-delay: var(--reveal-delay, 0ms);
   will-change: opacity, transform;
-  content-visibility: auto;
 }
 .reveal.is-visible {
   opacity: 1;
@@ -182,11 +181,9 @@ html {
   }
 }
 
-/* Below-the-fold sections should not inflate initial paint cost */
-.below-fold {
-  content-visibility: auto;
-  contain-intrinsic-size: 600px;
-}
+/* NOTE: `content-visibility: auto` is intentionally not used here. With a
+   guessed `contain-intrinsic-size` it makes tall sections expand as they enter
+   the viewport, which is a common source of layout shift. */
 
 /* Reduce GPU cost of decorative blurs on phones (brand colors unchanged) */
 @media (max-width: 1023px) {
