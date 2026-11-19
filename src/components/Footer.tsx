@@ -38,8 +38,8 @@ export default function Footer() {
               <Image
                 src="/images/logo.webp"
                 alt="شعار مكتبة طيف"
-                width={128}
-                height={128}
+                width={56}
+                height={56}
                 sizes="56px"
                 fetchPriority="low"
                 className="size-full object-contain"

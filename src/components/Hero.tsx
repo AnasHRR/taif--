@@ -18,16 +18,22 @@ export default function Hero() {
   // Preload the exact hero derivative each viewport will use, so the LCP image
   // starts downloading during HTML parsing instead of after CSS/JS. React
   // deduplicates these and emits a single <link> per variant in <head>.
+  preload("/images/banners/hero-xs.webp", {
+    as: "image",
+    type: "image/webp",
+    media: "(max-width: 480px)",
+    fetchPriority: "high",
+  });
   preload("/images/banners/hero-sm.webp", {
     as: "image",
     type: "image/webp",
-    media: "(max-width: 640px)",
+    media: "(min-width: 481px) and (max-width: 768px)",
     fetchPriority: "high",
   });
   preload("/images/banners/hero-md.webp", {
     as: "image",
     type: "image/webp",
-    media: "(min-width: 641px) and (max-width: 1024px)",
+    media: "(min-width: 769px) and (max-width: 1024px)",
     fetchPriority: "high",
   });
   preload("/images/banners/hero.webp", {
@@ -41,10 +47,11 @@ export default function Hero() {
     <>
       <section className="relative overflow-hidden bg-primary text-cream">
       {/* خلفية كونية — عنصر LCP: نقدّم نسخة WebP مضغوطة ومناسبة للشاشة
-          (31/75/139 ك.ب بدل صورة واحدة ثقيلة) مع أبعاد ثابتة لتفادي CLS. */}
+          (16/27/65/132 ك.ب بدل صورة واحدة ثقيلة) مع أبعاد ثابتة لتفادي CLS. */}
       <div className="absolute inset-0">
         <picture className="contents">
-          <source media="(max-width: 640px)" srcSet="/images/banners/hero-sm.webp" type="image/webp" />
+          <source media="(max-width: 480px)" srcSet="/images/banners/hero-xs.webp" type="image/webp" />
+          <source media="(max-width: 768px)" srcSet="/images/banners/hero-sm.webp" type="image/webp" />
           <source media="(max-width: 1024px)" srcSet="/images/banners/hero-md.webp" type="image/webp" />
           <source srcSet="/images/banners/hero.webp" type="image/webp" />
           <img

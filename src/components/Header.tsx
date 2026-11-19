@@ -115,9 +115,9 @@ export default function Header() {
               <Image
                 src="/images/logo.webp"
                 alt="شعار مكتبة طيف"
-                width={128}
-                height={128}
-                sizes="56px"
+                width={56}
+                height={56}
+                sizes="(max-width: 640px) 44px, 56px"
                 fetchPriority="low"
                 className="size-full object-contain"
               />
